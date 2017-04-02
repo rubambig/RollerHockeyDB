@@ -12,71 +12,71 @@ DROP TABLE games_played CASCADE CONSTRAINTS;
 --
 -- Create the tables
 --
-/*Player(playerID, fname, lname, height, weight, num, position, tID)*/
+/*Player(*playerID*, fname, lname, height, weight, num, position, tID)*/
 --
 CREATE TABLE player (
-  playerID      char(6) PRIMARY KEY,
-  fname     	varchar2(15),  
-  lname    		varchar2(15),
+  playerID    number(6) PRIMARY KEY,
+  fname     	varchar2(30),  
+  lname    		varchar2(30),
   height     	number(3),
   weight   		number(3),
   num       	number(2),
-  position      varchar2(15),
-  tID    		number(5)
+  position    char(1),
+  tID    		  number(5)
 );
 --
-/*Games(gameID, gDate, hscore, ascore)*/
+/*Games(*gameID*, gDate, hscore, ascore)*/
+
 --
 CREATE TABLE game (
-  gameID      	number(5) PRIMARY KEY,
-  gDate        	date,
+  gameID      number(5) PRIMARY KEY,
+  gDate       date, /* standard date format is DD-MON-YY */
   hscore    	number(2),
   ascore    	number(2)
 );
 --
-/*University(uName, uSize, yearFounded)*/
+/*University(*uName*, uSize, yearFounded)*/
 --
 CREATE TABLE university (
   uName      	varchar2(15) PRIMARY KEY,
   uSize       	number(6),
-  yearsFounded  number(4)
+  yearFounded  number(4)
 );
 --
-/*Team(teamID, jerseyColor, mascot, univName)*/
+/*Team(*teamID*, jerseyColor, mascot, univName)*/
 --
 CREATE TABLE team (
   teamID       	number(5) PRIMARY KEY,
-  jerseyColor  	varchar2(15),  
-  mascot		varchar2(15),
-  univName   	varchar2(15)
+  jerseyColor  	varchar2(20),  
+  mascot		    varchar2(30),
+  univName   	  varchar2(50)
 );
 --
-/*TeamStats(year, tmID, wins, losses, points)*/
+/*TeamStats(*year, tmID*, wins, losses, points)*/
 --
 CREATE TABLE team_stats (
   year        	number(4),
   tmID          number(5),
   wins         	number(2),
-  losses     	number(2),
+  losses     	  number(2),
   points        number(2),
-  primary key (tmID,year)
+  primary key (year,tmID)
 );
 --
-/*Locations(uniName , location)*/
+/*Locations(*uniName , location*)*/
 --
 CREATE TABLE locations (
-  uniName    	varchar2(15),
-  location      varchar2(15),
+  uniName    	  varchar2(50),
+  location      varchar2(30),
   primary key (uniName,location)
 );
 --
-/*GamesPlayed(pID, gID, goalsScored, MVP)*/
+/*GamesPlayed(pID, gID, goalsScored)*/
 --
 CREATE TABLE games_played (
-  pID    		number(6),
+  pID    		  number(6),
   gID       	number(5),
-  goalsScored   number(2),
-  MVP        	varchar(15),
+  goalsScored number(2),
   primary key (pID,gID)
 );
 --
