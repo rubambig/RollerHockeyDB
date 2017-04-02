@@ -14,11 +14,10 @@
 
 
 -- SUM
--- Find the sum of 
--- Output should be
-SELECT SUM()
-FROM
-WHERE
+-- Find the total number of games played in the season
+-- Output should be 
+SELECT SUM(t.wins)
+FROM team t;
 
 
 -- AVG
@@ -26,37 +25,31 @@ WHERE
 -- Output should be 21.3
 SELECT AVG(p.age)
 FROM player p, team t
-WHERE t.teamId = 57984 AND p.teamId = t.teamId
+WHERE t.teamId = 57984 AND p.teamId = t.teamId;
 
 
 -- MAX
 -- Find the maximum 
 -- Output should be
-SELECT MAX()
-FROM
-WHERE
-
+SELECT MAX(p.weight)
+FROM player p;
 
 -- MIN
 -- Find the minimum 
 -- Output should be
-SELECT MIN()
-FROM
-WHERE
+SELECT MIN(p.weight)
+FROM player p;
 
-
--- GROUP BY. HAVING, and ORDER BY
+-- GROUP BY, HAVING, and ORDER BY
 -- For every team that has more than 20 points, and more than 10 players, give the player name, age, team name, and number of points the team has
 -- output should be all players from Farmingdale, West Chester, Massachusetts, and Rhode Island
-
-
 SELECT p.name, p.age, t.teamName, s.points
 FROM player p, team t, team_stats s
 WHERE p.teamId = t.teamId
 GROUP BY p.name, p.age
 HAVING count(*) > 12
 AND SUM(s.points > 20)
-ORDER BY t.teamName
+ORDER BY t.teamName;
 
 
 -- Correlated subquery
@@ -68,26 +61,34 @@ WHERE
 
 
 -- Non-Correlated subquery
---
+-- 
 -- Output should be 
 
 
 -- Division query
---
+-- 
 -- Output should be
 
 
 -- Outer join query
---
+-- 
 -- Output should be
 
 
 -- Rank query
---
--- Output should be
+-- The rank of the number 15 in the win category
+-- Output should be 2
+SELECT RANK (15) WITHIN GROUP
+(ORDER BY t.wins ASC)
+FROM team t;
 
 
 -- Top N query
--- 
--- Output should be
-
+-- The top 3 teams in the points category 
+-- Output should be Neumann, Farmingdale, and West Chester
+SELECT t.univName, s.points
+FROM (SELECT *
+      FROM team t, team_stats s
+      WHERE t.teamId = s.teamId
+      ORDER BY s.points)
+WHERE ROWNUM < 3;
