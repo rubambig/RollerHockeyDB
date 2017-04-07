@@ -1,4 +1,4 @@
--- File: RollerHockeyDB.sql  
+-- File: RollerHockeyDB.sql
 --
 -- Drop the tables (in case they already exist)
 --
@@ -16,7 +16,7 @@ DROP TABLE games_played CASCADE CONSTRAINTS;
 --
 CREATE TABLE player (
   playerID    number(6) PRIMARY KEY,
-  fname     	varchar2(30),  
+  fname     	varchar2(30),
   lname    		varchar2(30),
   height     	number(3),
   weight   		number(3),
@@ -47,7 +47,7 @@ CREATE TABLE university (
 --
 CREATE TABLE team (
   teamID       	number(5) PRIMARY KEY,
-  jerseyColor  	varchar2(20),  
+  jerseyColor  	varchar2(20),
   mascot		    varchar2(30),
   univName   	  varchar2(50)
 );
@@ -175,8 +175,53 @@ insert into player values (	139657,	'Christopher',	'Malanga',	70,	230,	77,	'D',	
 insert into player values (	140053,	'Matt',	'Cyrus',	73,	190,	22,	'D',	57958	);
 insert into player values (	139613,	'Evan',	'Hosney',	70,	160,	1,	'G',	57958	);
 insert into player values (	139925,	'Michael',	'Macchia',	71,	140,	31,	'G',	57958	);
+
+--- Team Statistics table
+insert into team_stats values(2017, 57984, 16, 2, 32 );
+insert into team_stats values(2017, 57950, 15, 3, 30 );
+insert into team_stats values(2017, 57946, 14, 3, 29 );
+insert into team_stats values(2017, 57966, 13, 5, 26 );
+insert into team_stats values(2017, 57958, 11, 6, 23 );
+insert into team_stats values(2017, 57937, 9, 8, 19 );
+insert into team_stats values(2017, 57959, 4, 13, 9 );
+insert into team_stats values(2017, 57953, 4, 14, 8 );
+insert into team_stats values(2017, 57964, 3, 14, 7 );
+insert into team_stats values(2017, 57941, 1, 16, 3);
+
+-- University table
+insert into university values('Robert Morris University', 5000, 1921)
+insert into university values('Farmingdale State College', 9000, 1912)
+insert into university values('West Chester University of Pennsylvania', 16000, 1871)
+insert into university values('University of Massachusetts', 79000 , 1863)
+insert into university values('University of Rhode Island', 16000, 1892)
+insert into university values('Rowan University', 13000, 1923 )
+insert into university values('Hofstra University', 11000, 1935);
+insert into university values('Temple University', 40000, 1884 );
+insert into university values('State University of New York at Cortland', 7000, 1868 );
+insert into university values('Neumann University', 3000, 1965);
+
+--- Locations
+insert into locations values('Robert Morris University', 'Moon, PA');
+insert into locations values('Farmingdale State College ', 'Farmingdale, NY');
+insert into locations values('West Chester University of Pennsylvania', 'West Chester, PA');
+insert into locations values('University of Massachusetts', 'Amherst, MA' );
+insert into locations values('University of Massachusetts', 'Boston, MA' );
+insert into locations values('University of Massachusetts', 'North Dartmouth, MA' );
+insert into locations values('University of Massachusetts', 'Lowell, MA');
+insert into locations values('University of Massachusetts', 'Worcester, MA' );
+insert into locations values('University of Rhode Island', 'Kingston, RI' );
+insert into locations values('University of Rhode Island', 'Providence, RI');
+insert into locations values('University of Rhode Island', 'Narragansett, RI');
+insert into locations values('University of Rhode Island', 'West Greenwich, RI');
+insert into locations values('Rowan University', 'Glassboro, NJ');
+insert into locations values('Rowan University', 'Camden, NJ' );
+insert into locations values('Hofstra University', 'Hempstead, NY' );
+insert into locations values('Temple University', 'Philadelphia, PA' );
+insert into locations values('State University of New York at Cortland', 'Cortland' );
+insert into locations values('Neumann University', 'Aston, PA' );
+
+
 --
 --
 
 COMMIT;
-
