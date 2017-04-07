@@ -107,6 +107,8 @@ Deferrable initially deferred;
 alter session set  NLS_DATE_FORMAT = 'YYYY-MM-DD';
 --
 --
+
+-- Players
 insert into player values (	138942,	'Tyler',	'Kraft',	70,	185,	16,	'F',	57984	);
 insert into player values (	138970,	'Sean',	'Phelan',	72,	200,	96,	'F',	57984	);
 insert into player values (	138962,	'Nicholas',	'DeSalvo',	66,	145,	11,	'F',	57984	);
@@ -176,7 +178,7 @@ insert into player values (	140053,	'Matt',	'Cyrus',	73,	190,	22,	'D',	57958	);
 insert into player values (	139613,	'Evan',	'Hosney',	70,	160,	1,	'G',	57958	);
 insert into player values (	139925,	'Michael',	'Macchia',	71,	140,	31,	'G',	57958	);
 
---- Team Statistics table
+--- Team Stats
 insert into team_stats values(2017, 57984, 16, 2, 32 );
 insert into team_stats values(2017, 57950, 15, 3, 30 );
 insert into team_stats values(2017, 57946, 14, 3, 29 );
@@ -188,7 +190,7 @@ insert into team_stats values(2017, 57953, 4, 14, 8 );
 insert into team_stats values(2017, 57964, 3, 14, 7 );
 insert into team_stats values(2017, 57941, 1, 16, 3);
 
--- University table
+-- Universitys
 insert into university values('Robert Morris University', 5000, 1921);
 insert into university values('Farmingdale State College', 9000, 1912);
 insert into university values('West Chester University of Pennsylvania', 16000, 1871);
@@ -220,8 +222,6 @@ insert into locations values('Temple University', 'Philadelphia, PA' );
 insert into locations values('State University of New York at Cortland', 'Cortland' );
 insert into locations values('Neumann University', 'Aston, PA' );
 
-/*Team(*teamID*, jerseyColor, mascot, univName)*/
-
 --- Teams
 insert into team values(57984, 'Navy', 'Knights', 'Neumann University');
 insert into team values(57950, 'Green', 'Rams', 'Farmingdale State College');
@@ -233,6 +233,12 @@ insert into team values(57959, 'Navy', 'Colonials', 'Robert Morris University');
 insert into team values(57953, 'Blue', 'Pride', 'Hofstra University');
 insert into team values(57964, 'Cherry', 'Owls', 'Temple University');
 insert into team values(57941, 'Red', 'Dragons', 'State University of New York at Cortland');
+
+-- Games
+
+-- Games Played
+
+
 --
 --
 
