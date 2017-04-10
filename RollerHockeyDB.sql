@@ -26,7 +26,6 @@ CREATE TABLE player (
 );
 --
 /*Games(*gameID*, gDate, hscore, ascore)*/
-
 --
 CREATE TABLE game (
   gameID    	number(5) PRIMARY KEY,
@@ -234,8 +233,29 @@ insert into team values(57953, 'Blue', 'Pride', 'Hofstra University');
 insert into team values(57964, 'Cherry', 'Owls', 'Temple University');
 insert into team values(57941, 'Red', 'Dragons', 'State University of New York at Cortland');
 
+/*Games(*gameID*, gDate, hscore, ascore)*/
 -- Games
+insert into team values(118065, 10/22/2016, 6, 5);
+insert into team values(118075, 10/22/2016, 2, 8);
+insert into team values(118078, 10/22/2016, 7, 1);
+insert into team values(118278, 11/05/2016, 12, 4);
+insert into team values(118270, 11/05/2016, 15, 1);
+insert into team values(118275, 11/05/2016, 5, 1);
+insert into team values(118299, 11/06/2016, 7, 2);
+insert into team values(118303, 11/06/2016, 12, 3);
+insert into team values(118320, 11/19/2016, 11, 1);
+insert into team values(118323, 11/19/2016, 6, 9);
+insert into team values(118315, 11/19/2016, 1, 10);
+insert into team values(118167, 02/11/2017, 9, 2);
+insert into team values(118171, 02/11/2017, 10, 4);
+insert into team values(118180, 02/12/2017, 12, 1);
+insert into team values(118488, 02/17/2017, 9, 2);
+insert into team values(118520, 02/18/2017, 12, 0);
+insert into team values(118510, 02/18/2017, 12, 1);
+insert into team values(118548, 02/19/2017, 5, 11);
 
+
+/*GamesPlayed(pID, gID, goalsScored)*/
 -- Games Played
 
 
