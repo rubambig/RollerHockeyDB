@@ -25,13 +25,15 @@ CREATE TABLE player (
   tID    	 	number(5)
 );
 --
-/*Games(*gameID*, gDate, hscore, ascore)*/
+/*Games(*gameID*, gDate, hscore, ascore, hTID, aTID)*/
 --
 CREATE TABLE game (
   gameID    	number(5) PRIMARY KEY,
   gDate       	date, /* standard date format is DD-MON-YY */
   hscore    	number(2),
-  ascore    	number(2)
+  ascore    	number(2),
+  hTID		number(5),
+  aTID		number(5)
 );
 --
 /*University(*uName*, uSize, yearFounded)*/
@@ -97,6 +99,12 @@ ADD FOREIGN KEY (pID) references player(playerID)
 Deferrable initially deferred;
 ALTER TABLE games_played
 ADD FOREIGN KEY (gID) references game(gameID)
+Deferrable initially deferred;
+ALTER TABLE games
+ADD FOREIGN KEY (hTID) references team(teamID)
+Deferrable initially deferred;
+ALTER TABLE games
+ADD FOREIGN KEY (aTID) references team(teamID)
 Deferrable initially deferred;
 --
 -- ----------------------------------------------------------
@@ -233,7 +241,7 @@ insert into team values(57953, 'Blue', 'Pride', 'Hofstra University');
 insert into team values(57964, 'Cherry', 'Owls', 'Temple University');
 insert into team values(57941, 'Red', 'Dragons', 'State University of New York at Cortland');
 
-/*Games(*gameID*, gDate, hscore, ascore)*/
+/*Games(gameID, gDate, hscore, ascore, hTID, aTID)*/
 -- Games
 insert into team values(118065, 10/22/2016, 6, 5);
 insert into team values(118075, 10/22/2016, 2, 8);
