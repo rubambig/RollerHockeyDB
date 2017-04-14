@@ -1,3 +1,6 @@
+-- Team 1
+-- Bekah Suttner, Gloire Rubambiza, Wesley Guthrie, David Brown
+-- 
 -- File: RollerHockeyDB.sql
 --
 -- Drop the tables (in case they already exist)
@@ -28,12 +31,12 @@ CREATE TABLE player (
 /*Games(*gameID*, gDate, hscore, ascore, hTID, aTID)*/
 --
 CREATE TABLE game (
-  gameID    	number(5) PRIMARY KEY,
-  gDate       	date, /* standard date format is DD-MON-YY */
+  gameID    	number(6) PRIMARY KEY,
+  gDate       	date, /* standard date format is DD-MON-YYYY */
   hscore    	number(2),
   ascore    	number(2),
-  hTID		number(5),
-  aTID		number(5)
+  hTID			number(5),
+  aTID			number(5)
 );
 --
 /*University(*uName*, uSize, yearFounded)*/
@@ -76,43 +79,31 @@ CREATE TABLE locations (
 --
 CREATE TABLE games_played (
   pID    		number(6),
-  gID       	number(5),
+  gID       	number(6),
   goalsScored 	number(2),
   primary key (pID,gID)
 );
 --
 -- Add the foreign keys:
-ALTER TABLE player
-ADD FOREIGN KEY (tID) references team(teamID)
-Deferrable initially deferred;
-ALTER TABLE team
-ADD FOREIGN KEY (univName) references university(uName)
-Deferrable initially deferred;
-ALTER TABLE team_stats
-ADD FOREIGN KEY (tmID) references team(teamID)
-Deferrable initially deferred;
-ALTER TABLE locations
-ADD FOREIGN KEY (uniName) references university(uName)
-Deferrable initially deferred;
-ALTER TABLE games_played
-ADD FOREIGN KEY (pID) references player(playerID)
-Deferrable initially deferred;
-ALTER TABLE games_played
-ADD FOREIGN KEY (gID) references game(gameID)
-Deferrable initially deferred;
-ALTER TABLE games
-ADD FOREIGN KEY (hTID) references team(teamID)
-Deferrable initially deferred;
-ALTER TABLE games
-ADD FOREIGN KEY (aTID) references team(teamID)
-Deferrable initially deferred;
+CONSTRAINT teamIdForeignKey FOREIGN KEY(tID) references team(teamID);
+
+CONSTRAINT univNameForeignKey FOREIGN KEY(univName) references university(uName);
+
+CONSTRAINT tmIDForeignKey FOREIGN KEY(tmID) references team(teamID);
+
+CONSTRAINT uniNameForeignKey FOREIGN KEY(uniName) references university(uName);
+
+CONSTRAINT pIDForeignKey FOREIGN KEY(pID) references player(playerID);
+
+CONSTRAINT gIDForeignKey FOREIGN KEY(gID) references game(gameID);
+
+CONSTRAINT hTIDForeignKey FOREIGN KEY(hTID) references team(teamID);
+
+CONSTRAINT aTIDForeignKey FOREIGN KEY(aTID) references team(teamID);
 --
 -- ----------------------------------------------------------
 -- Populate the database
 -- ----------------------------------------------------------
---
-alter session set  NLS_DATE_FORMAT = 'YYYY-MM-DD';
---
 --
 
 -- Players
@@ -197,7 +188,7 @@ insert into team_stats values(2017, 57953, 4, 14, 8 );
 insert into team_stats values(2017, 57964, 3, 14, 7 );
 insert into team_stats values(2017, 57941, 1, 16, 3);
 
--- Universitys
+-- Universities
 insert into university values('Robert Morris University', 5000, 1921);
 insert into university values('Farmingdale State College', 9000, 1912);
 insert into university values('West Chester University of Pennsylvania', 16000, 1871);
@@ -243,30 +234,56 @@ insert into team values(57941, 'Red', 'Dragons', 'State University of New York a
 
 /*Games(gameID, gDate, hscore, ascore, hTID, aTID)*/
 -- Games
-insert into team values(118065, 10/22/2016, 6, 5);
-insert into team values(118075, 10/22/2016, 2, 8);
-insert into team values(118078, 10/22/2016, 7, 1);
-insert into team values(118278, 11/05/2016, 12, 4);
-insert into team values(118270, 11/05/2016, 15, 1);
-insert into team values(118275, 11/05/2016, 5, 1);
-insert into team values(118299, 11/06/2016, 7, 2);
-insert into team values(118303, 11/06/2016, 12, 3);
-insert into team values(118320, 11/19/2016, 11, 1);
-insert into team values(118323, 11/19/2016, 6, 9);
-insert into team values(118315, 11/19/2016, 1, 10);
-insert into team values(118167, 02/11/2017, 9, 2);
-insert into team values(118171, 02/11/2017, 10, 4);
-insert into team values(118180, 02/12/2017, 12, 1);
-insert into team values(118488, 02/17/2017, 9, 2);
-insert into team values(118520, 02/18/2017, 12, 0);
-insert into team values(118510, 02/18/2017, 12, 1);
-insert into team values(118548, 02/19/2017, 5, 11);
-
+insert into game values(118065, '22-Oct-2016', 6, 5, 57984, 57946);
+insert into game values(118075, '22-Oct-2016', 2, 8, 57937, 57984);
+insert into game values(118078, '22-Oct-2016', 7, 1, 57984, 57937);
+insert into game values(118278, '05-Nov-2016', 12, 4, 57984, 57958);
+insert into game values(118270, '05-Nov-2016', 15, 1, 57984, 57953);
+insert into game values(118275, '05-Nov-2016', 5, 1, 57984, 57950);
+insert into game values(118299, '06-Nov-2016', 7, 2, 57966, 57984);
+insert into game values(118303, '06-Nov-2016', 12, 3, 57984, 57958);
+insert into game values(118320, '19-Nov-2016', 11, 1, 57984, 57964);
+insert into game values(118323, '19-Nov-2016', 6, 9, 57984, 57950);
+insert into game values(118315, '19-Nov-2016', 1, 10, 57946, 57984);
+insert into game values(118167, '11-Feb-2017', 9, 2, 57984, 57959);
+insert into game values(118171, '11-Feb-2017', 10, 4, 57984, 57964);
+insert into game values(118180, '12-Feb-2017', 12, 1, 57984, 57959);
+insert into game values(118488, '17-Feb-2017', 9, 2, 57984, 57941);
+insert into game values(118520, '18-Feb-2017', 12, 0, 57984, 57941);
+insert into game values(118510, '18-Feb-2017', 12, 1, 57984, 57953);
+insert into game values(118548, '19-Feb-2017', 5, 11, 57966, 57984);
+insert into game values(117934, '15-Oct-2016', 6, 9, 57958, 57950);
+insert into game values(117940, '15-Oct-2016', 2, 6, 57966, 57950);
+insert into game values(117944, '15-Oct-2016', 2, 4, 57941, 57950);
+insert into game values(117951, '16-Oct-2016', 3, 4, 57958, 57950);
+insert into game values(118276, '05-Nov-2016', 2, 5, 57966, 57950);
+insert into game values(118267, '05-Nov-2016', 1, 5, 57937, 57950);
+insert into game values(118271, '05-Nov-2016', 1, 8, 57941, 57950);
+insert into game values(118275, '05-Nov-2016', 1, 5, 57950, 57984);
+insert into game values(118318, '19-Nov-2016', 0, 6, 57964, 57950);
+insert into game values(118321, '19-Nov-2016', 2, 3, 57950, 57946);
+insert into game values(118323, '19-Nov-2016', 6, 9, 57984, 57950);
+insert into game values(118329, '20-Nov-2016', 3, 4, 57950, 57946);
+insert into game values(118134, '28-Jan-2017', 8, 0, 57950, 57953);
+insert into game values(118125, '28-Jan-2017', 8, 1, 57950, 57964);
+insert into game values(118138, '29-Jan-2017', 3, 5, 57953, 57950);
+insert into game values(118504, '18-Feb-2017', 15, 3, 57950, 57959);
+insert into game values(118547, '19-Feb-2017', 12, 0, 57950, 57959);
+insert into game values(118550, '19-Feb-2017', 9, 0, 57950, 57937);
 
 /*GamesPlayed(pID, gID, goalsScored)*/
 -- Games Played
-
-
+insert into games_played values(139698, 118065, 0);
+insert into games_played values(139674, 118065, 2);
+insert into games_played values(139675, 118065, 1);
+insert into games_played values(139676, 118065, 1);
+insert into games_played values(139683, 118065, 0);
+insert into games_played values(139687, 118065, 1);
+insert into games_played values(139678, 118065, 0);
+insert into games_played values(139707, 118065, 0);
+insert into games_played values(139681, 118065, 0);
+insert into games_played values(139682, 118065, 0);
+insert into games_played values(139684, 118065, 0);
 --
 --
 
