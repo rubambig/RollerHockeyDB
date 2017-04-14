@@ -281,8 +281,17 @@ insert into game values(118550, '19-Feb-2017', 9, 0, 57950, 57937);
 
 /*GamesPlayed(pID, gID, goalsScored)*/
 -- Games Played
-
-
+insert into games_played values(Hoffman, 118065, 0);
+insert into games_played values(Delseni, 118065, 2);
+insert into games_played values(Denczi, 118065, 1);
+insert into games_played values(Kichline, 118065, 1);
+insert into games_played values(Hirsh, 118065, 0);
+insert into games_played values(Giannantonio, 118065, 1);
+insert into games_played values(Whitman, 118065, 0);
+insert into games_played values(McComsey, 118065, 0);
+insert into games_played values(Green, 118065, 0);
+insert into games_played values(Bowen, 118065, 0);
+insert into games_played values(Foster, 118065, 0);
 --
 --
 
