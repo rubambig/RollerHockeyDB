@@ -5,62 +5,62 @@
 --
 -- Drop the tables (in case they already exist)
 --
+DROP TABLE university CASCADE CONSTRAINTS;
+DROP TABLE team CASCADE CONSTRAINTS;
 DROP TABLE player CASCADE CONSTRAINTS;
 DROP TABLE game CASCADE CONSTRAINTS;
-DROP TABLE team CASCADE CONSTRAINTS;
-DROP TABLE university CASCADE CONSTRAINTS;
 DROP TABLE team_stats CASCADE CONSTRAINTS;
 DROP TABLE locations CASCADE CONSTRAINTS;
 DROP TABLE games_played CASCADE CONSTRAINTS;
 --
 -- Create the tables
 --
-/*Player(*playerID*, fname, lname, height, weight, num, position, tID)*/
+-- University(*uName*, uSize, yearFounded)
+--
+CREATE TABLE university (
+  uName         varchar2(50) PRIMARY KEY,
+  uSize         number(6),
+  yearFounded   number(4)
+);
+--
+-- Team(*teamID*, jerseyColor, mascot, univName)*/
+--
+CREATE TABLE team (
+  teamID        number(5) PRIMARY KEY,
+  jerseyColor   varchar2(20),
+  mascot        varchar2(30),
+  univName      varchar2(50),
+  CONSTRAINT ICunivNameForeignKey FOREIGN KEY (univName) REFERENCES university(uName)
+);
+--
+-- Player(*playerID*, fname, lname, height, weight, num, position, tID)
 --
 CREATE TABLE player (
   playerID    	number(6) PRIMARY KEY,
   fname     	varchar2(30),
-  lname    		varchar2(30),
+  lname    	varchar2(30),
   height     	number(3),
-  weight   		number(3),
+  weight  	number(3),
   num       	number(2),
   position    	char(1),
-  tID    	 	number(5),
+  tID     	number(5),
   CONSTRAINT ICteamIdForeignKey FOREIGN KEY (tID) REFERENCES team(teamID)
 );
 --
-/*Games(*gameID*, gDate, hscore, ascore, hTID, aTID)*/
+-- Games(*gameID*, gDate, hscore, ascore, hTID, aTID)
 --
 CREATE TABLE game (
   gameID    	number(6) PRIMARY KEY,
   gDate       	date, /* standard date format is DD-MON-YYYY */
   hscore    	number(2),
   ascore    	number(2),
-  hTID			number(5),
-  aTID			number(5),
+  hTID		number(5),
+  aTID		number(5),
   CONSTRAINT IChTIDForeignKey FOREIGN KEY (hTID) REFERENCES team(teamID),
   CONSTRAINT ICaTIDForeignKey FOREIGN KEY (aTID) REFERENCES team(teamID)
 );
 --
-/*University(*uName*, uSize, yearFounded)*/
---
-CREATE TABLE university (
-  uName      	varchar2(50) PRIMARY KEY,
-  uSize    		number(6),
-  yearFounded  	number(4)
-);
---
-/*Team(*teamID*, jerseyColor, mascot, univName)*/
---
-CREATE TABLE team (
-  teamID       	number(5) PRIMARY KEY,
-  jerseyColor  	varchar2(20),
-  mascot		varchar2(30),
-  univName   	varchar2(50),
-  CONSTRAINT ICunivNameForeignKey FOREIGN KEY (univName) REFERENCES university(uName)
-);
---
-/*TeamStats(*year, tmID*, wins, losses, points)*/
+-- TeamStats(*year, tmID*, wins, losses, points)
 --
 CREATE TABLE team_stats (
   year        	number(4),
@@ -72,7 +72,7 @@ CREATE TABLE team_stats (
   CONSTRAINT ICtmIDForeignKey FOREIGN KEY (tmID) REFERENCES team(teamID)
 );
 --
-/*Locations(*uniName , location*)*/
+-- Locations(*uniName , location*)
 --
 CREATE TABLE locations (
   uniName    	varchar2(50),
@@ -81,10 +81,10 @@ CREATE TABLE locations (
   CONSTRAINT ICuniNameForeignKey FOREIGN KEY(uniName) REFERENCES university(uName)
 );
 --
-/*GamesPlayed(pID, gID, goalsScored)*/
+-- GamesPlayed(pID, gID, goalsScored)
 --
 CREATE TABLE games_played (
-  pID    		number(6),
+  pID    	number(6),
   gID       	number(6),
   goalsScored 	number(2),
   primary key (pID,gID),
@@ -96,7 +96,6 @@ CREATE TABLE games_played (
 -- Populate the database
 -- ----------------------------------------------------------
 --
-
 -- Players
 insert into player values (	138942,	'Tyler',	'Kraft',	70,	185,	16,	'F',	57984	);
 insert into player values (	138970,	'Sean',	'Phelan',	72,	200,	96,	'F',	57984	);
@@ -166,19 +165,7 @@ insert into player values (	139657,	'Christopher',	'Malanga',	70,	230,	77,	'D',	
 insert into player values (	140053,	'Matt',	'Cyrus',	73,	190,	22,	'D',	57958	);
 insert into player values (	139613,	'Evan',	'Hosney',	70,	160,	1,	'G',	57958	);
 insert into player values (	139925,	'Michael',	'Macchia',	71,	140,	31,	'G',	57958	);
-
---- Team Stats
-insert into team_stats values(2017, 57984, 16, 2, 32 );
-insert into team_stats values(2017, 57950, 15, 3, 30 );
-insert into team_stats values(2017, 57946, 14, 3, 29 );
-insert into team_stats values(2017, 57966, 13, 5, 26 );
-insert into team_stats values(2017, 57958, 11, 6, 23 );
-insert into team_stats values(2017, 57937, 9, 8, 19 );
-insert into team_stats values(2017, 57959, 4, 13, 9 );
-insert into team_stats values(2017, 57953, 4, 14, 8 );
-insert into team_stats values(2017, 57964, 3, 14, 7 );
-insert into team_stats values(2017, 57941, 1, 16, 3);
-
+--
 -- Universities
 insert into university values('Robert Morris University', 5000, 1921);
 insert into university values('Farmingdale State College', 9000, 1912);
@@ -190,8 +177,8 @@ insert into university values('Hofstra University', 11000, 1935);
 insert into university values('Temple University', 40000, 1884 );
 insert into university values('State University of New York at Cortland', 7000, 1868 );
 insert into university values('Neumann University', 3000, 1965);
-
---- Locations
+--
+-- Locations
 insert into locations values('Robert Morris University', 'Moon, PA');
 insert into locations values('Farmingdale State College', 'Farmingdale, NY');
 insert into locations values('West Chester University of Pennsylvania', 'West Chester, PA');
@@ -210,8 +197,8 @@ insert into locations values('Hofstra University', 'Hempstead, NY' );
 insert into locations values('Temple University', 'Philadelphia, PA' );
 insert into locations values('State University of New York at Cortland', 'Cortland' );
 insert into locations values('Neumann University', 'Aston, PA' );
-
---- Teams
+--
+-- Teams
 insert into team values(57984, 'Navy', 'Knights', 'Neumann University');
 insert into team values(57950, 'Green', 'Rams', 'Farmingdale State College');
 insert into team values(57946, 'Purple', 'Golden Rams', 'West Chester University of Pennsylvania');
@@ -222,8 +209,19 @@ insert into team values(57959, 'Navy', 'Colonials', 'Robert Morris University');
 insert into team values(57953, 'Blue', 'Pride', 'Hofstra University');
 insert into team values(57964, 'Cherry', 'Owls', 'Temple University');
 insert into team values(57941, 'Red', 'Dragons', 'State University of New York at Cortland');
-
-/*Games(gameID, gDate, hscore, ascore, hTID, aTID)*/
+--
+-- Team Stats
+insert into team_stats values(2017, 57984, 16, 2, 32 );
+insert into team_stats values(2017, 57950, 15, 3, 30 );
+insert into team_stats values(2017, 57946, 14, 3, 29 );
+insert into team_stats values(2017, 57966, 13, 5, 26 );
+insert into team_stats values(2017, 57958, 11, 6, 23 );
+insert into team_stats values(2017, 57937, 9, 8, 19 );
+insert into team_stats values(2017, 57959, 4, 13, 9 );
+insert into team_stats values(2017, 57953, 4, 14, 8 );
+insert into team_stats values(2017, 57964, 3, 14, 7 );
+insert into team_stats values(2017, 57941, 1, 16, 3);
+--
 -- Games
 insert into game values(118065, '22-Oct-2016', 6, 5, 57984, 57946);
 insert into game values(118075, '22-Oct-2016', 2, 8, 57937, 57984);
@@ -261,8 +259,7 @@ insert into game values(118138, '29-Jan-2017', 3, 5, 57953, 57950);
 insert into game values(118504, '18-Feb-2017', 15, 3, 57950, 57959);
 insert into game values(118547, '19-Feb-2017', 12, 0, 57950, 57959);
 insert into game values(118550, '19-Feb-2017', 9, 0, 57950, 57937);
-
-/*GamesPlayed(pID, gID, goalsScored)*/
+--
 -- Games Played
 insert into games_played values(139698, 118065, 0);
 insert into games_played values(139674, 118065, 2);
@@ -277,5 +274,4 @@ insert into games_played values(139682, 118065, 0);
 insert into games_played values(139684, 118065, 0);
 --
 --
-
 COMMIT;
