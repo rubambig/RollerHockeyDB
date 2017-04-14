@@ -96,6 +96,30 @@ CREATE TABLE games_played (
 -- Populate the database
 -- ----------------------------------------------------------
 --
+-- Universities
+insert into university values('Robert Morris University', 5000, 1921);
+insert into university values('Farmingdale State College', 9000, 1912);
+insert into university values('West Chester University of Pennsylvania', 16000, 1871);
+insert into university values('University of Massachusetts', 79000 , 1863);
+insert into university values('University of Rhode Island', 16000, 1892);
+insert into university values('Rowan University', 13000, 1923 );
+insert into university values('Hofstra University', 11000, 1935);
+insert into university values('Temple University', 40000, 1884 );
+insert into university values('State University of New York at Cortland', 7000, 1868 );
+insert into university values('Neumann University', 3000, 1965);
+--
+-- Teams
+insert into team values(57984, 'Navy', 'Knights', 'Neumann University');
+insert into team values(57950, 'Green', 'Rams', 'Farmingdale State College');
+insert into team values(57946, 'Purple', 'Golden Rams', 'West Chester University of Pennsylvania');
+insert into team values(57966, 'Maroon', 'Minuteman', 'University of Massachusetts');
+insert into team values(57958, 'Dark Blue', 'Rams', 'University of Rhode Island');
+insert into team values(57937, 'Black', 'Owls', 'Rowan University');
+insert into team values(57959, 'Navy', 'Colonials', 'Robert Morris University');
+insert into team values(57953, 'Blue', 'Pride', 'Hofstra University');
+insert into team values(57964, 'Cherry', 'Owls', 'Temple University');
+insert into team values(57941, 'Red', 'Dragons', 'State University of New York at Cortland');
+--
 -- Players
 insert into player values (	138942,	'Tyler',	'Kraft',	70,	185,	16,	'F',	57984	);
 insert into player values (	138970,	'Sean',	'Phelan',	72,	200,	96,	'F',	57984	);
@@ -166,18 +190,6 @@ insert into player values (	140053,	'Matt',	'Cyrus',	73,	190,	22,	'D',	57958	);
 insert into player values (	139613,	'Evan',	'Hosney',	70,	160,	1,	'G',	57958	);
 insert into player values (	139925,	'Michael',	'Macchia',	71,	140,	31,	'G',	57958	);
 --
--- Universities
-insert into university values('Robert Morris University', 5000, 1921);
-insert into university values('Farmingdale State College', 9000, 1912);
-insert into university values('West Chester University of Pennsylvania', 16000, 1871);
-insert into university values('University of Massachusetts', 79000 , 1863);
-insert into university values('University of Rhode Island', 16000, 1892);
-insert into university values('Rowan University', 13000, 1923 );
-insert into university values('Hofstra University', 11000, 1935);
-insert into university values('Temple University', 40000, 1884 );
-insert into university values('State University of New York at Cortland', 7000, 1868 );
-insert into university values('Neumann University', 3000, 1965);
---
 -- Locations
 insert into locations values('Robert Morris University', 'Moon, PA');
 insert into locations values('Farmingdale State College', 'Farmingdale, NY');
@@ -197,18 +209,6 @@ insert into locations values('Hofstra University', 'Hempstead, NY' );
 insert into locations values('Temple University', 'Philadelphia, PA' );
 insert into locations values('State University of New York at Cortland', 'Cortland' );
 insert into locations values('Neumann University', 'Aston, PA' );
---
--- Teams
-insert into team values(57984, 'Navy', 'Knights', 'Neumann University');
-insert into team values(57950, 'Green', 'Rams', 'Farmingdale State College');
-insert into team values(57946, 'Purple', 'Golden Rams', 'West Chester University of Pennsylvania');
-insert into team values(57966, 'Maroon', 'Minuteman', 'University of Massachusetts');
-insert into team values(57958, 'Dark Blue', 'Rams', 'University of Rhode Island');
-insert into team values(57937, 'Black', 'Owls', 'Rowan University');
-insert into team values(57959, 'Navy', 'Colonials', 'Robert Morris University');
-insert into team values(57953, 'Blue', 'Pride', 'Hofstra University');
-insert into team values(57964, 'Cherry', 'Owls', 'Temple University');
-insert into team values(57941, 'Red', 'Dragons', 'State University of New York at Cortland');
 --
 -- Team Stats
 insert into team_stats values(2017, 57984, 16, 2, 32 );
@@ -248,10 +248,8 @@ insert into game values(117951, '16-Oct-2016', 3, 4, 57958, 57950);
 insert into game values(118276, '05-Nov-2016', 2, 5, 57966, 57950);
 insert into game values(118267, '05-Nov-2016', 1, 5, 57937, 57950);
 insert into game values(118271, '05-Nov-2016', 1, 8, 57941, 57950);
-insert into game values(118275, '05-Nov-2016', 1, 5, 57950, 57984);
 insert into game values(118318, '19-Nov-2016', 0, 6, 57964, 57950);
 insert into game values(118321, '19-Nov-2016', 2, 3, 57950, 57946);
-insert into game values(118323, '19-Nov-2016', 6, 9, 57984, 57950);
 insert into game values(118329, '20-Nov-2016', 3, 4, 57950, 57946);
 insert into game values(118134, '28-Jan-2017', 8, 0, 57950, 57953);
 insert into game values(118125, '28-Jan-2017', 8, 1, 57950, 57964);
