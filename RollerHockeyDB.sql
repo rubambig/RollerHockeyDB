@@ -76,7 +76,7 @@ CREATE TABLE locations (
 --
 CREATE TABLE games_played (
   pID    		number(6),
-  gID       	number(5),
+  gID       	number(6),
   goalsScored 	number(2),
   primary key (pID,gID)
 );
