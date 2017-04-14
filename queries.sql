@@ -67,7 +67,7 @@ WHERE NOT EXISTS (SELECT gp.goalsScored
 		  FROM games_played
 		  WHERE gp.pID = p.pid
 		  AND gp.goalsScored < 20)
-ORDER BY e.lname;
+ORDER BY p.lname;
 --
 --
 -- Non-Correlated subquery
@@ -99,6 +99,6 @@ FROM team_stats t;
 SELECT t.univName, s.points
 FROM (SELECT *
       FROM team t, team_stats s
-      WHERE t.teamId = s.teamId
+      WHERE t.teamId = s.tmID
       ORDER BY s.points)
 WHERE ROWNUM < 3;
