@@ -25,7 +25,8 @@ CREATE TABLE player (
   weight   		number(3),
   num       	number(2),
   position    	char(1),
-  tID    	 	number(5)
+  tID    	 	number(5),
+  CONSTRAINT ICteamIdForeignKey FOREIGN KEY (tID) REFERENCES team(teamID)
 );
 --
 /*Games(*gameID*, gDate, hscore, ascore, hTID, aTID)*/
@@ -36,7 +37,9 @@ CREATE TABLE game (
   hscore    	number(2),
   ascore    	number(2),
   hTID			number(5),
-  aTID			number(5)
+  aTID			number(5),
+  CONSTRAINT IChTIDForeignKey FOREIGN KEY (hTID) REFERENCES team(teamID),
+  CONSTRAINT ICaTIDForeignKey FOREIGN KEY (aTID) REFERENCES team(teamID)
 );
 --
 /*University(*uName*, uSize, yearFounded)*/
@@ -53,7 +56,8 @@ CREATE TABLE team (
   teamID       	number(5) PRIMARY KEY,
   jerseyColor  	varchar2(20),
   mascot		varchar2(30),
-  univName   	varchar2(50)
+  univName   	varchar2(50),
+  CONSTRAINT ICunivNameForeignKey FOREIGN KEY (univName) REFERENCES university(uName)
 );
 --
 /*TeamStats(*year, tmID*, wins, losses, points)*/
@@ -64,7 +68,8 @@ CREATE TABLE team_stats (
   wins         	number(2),
   losses     	number(2),
   points        number(2),
-  primary key (year,tmID)
+  PRIMARY KEY (year,tmID),
+  CONSTRAINT ICtmIDForeignKey FOREIGN KEY (tmID) REFERENCES team(teamID)
 );
 --
 /*Locations(*uniName , location*)*/
@@ -72,7 +77,8 @@ CREATE TABLE team_stats (
 CREATE TABLE locations (
   uniName    	varchar2(50),
   location      varchar2(30),
-  primary key (uniName,location)
+  primary key (uniName,location),
+  CONSTRAINT ICuniNameForeignKey FOREIGN KEY(uniName) REFERENCES university(uName)
 );
 --
 /*GamesPlayed(pID, gID, goalsScored)*/
@@ -81,25 +87,10 @@ CREATE TABLE games_played (
   pID    		number(6),
   gID       	number(6),
   goalsScored 	number(2),
-  primary key (pID,gID)
+  primary key (pID,gID),
+  CONSTRAINT ICpIDForeignKey FOREIGN KEY(pID) REFERENCES player(playerID),
+  CONSTRAINT ICgIDForeignKey FOREIGN KEY(gID) REFERENCES game(gameID)
 );
---
--- Add the foreign keys:
-CONSTRAINT teamIdForeignKey FOREIGN KEY(tID) references team(teamID);
-
-CONSTRAINT univNameForeignKey FOREIGN KEY(univName) references university(uName);
-
-CONSTRAINT tmIDForeignKey FOREIGN KEY(tmID) references team(teamID);
-
-CONSTRAINT uniNameForeignKey FOREIGN KEY(uniName) references university(uName);
-
-CONSTRAINT pIDForeignKey FOREIGN KEY(pID) references player(playerID);
-
-CONSTRAINT gIDForeignKey FOREIGN KEY(gID) references game(gameID);
-
-CONSTRAINT hTIDForeignKey FOREIGN KEY(hTID) references team(teamID);
-
-CONSTRAINT aTIDForeignKey FOREIGN KEY(aTID) references team(teamID);
 --
 -- ----------------------------------------------------------
 -- Populate the database
