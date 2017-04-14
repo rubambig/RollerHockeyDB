@@ -242,42 +242,42 @@ insert into team values(57941, 'Red', 'Dragons', 'State University of New York a
 
 /*Games(gameID, gDate, hscore, ascore, hTID, aTID)*/
 -- Games
-insert into game values(118065, '22-Oct-2016', 6, 5, Neuwmann, West Chester);
-insert into game values(118075, '22-Oct-2016', 2, 8, Rowan, Neuwmann);
-insert into game values(118078, '22-Oct-2016', 7, 1, Neuwmann, Rowan);
-insert into game values(118278, '05-Nov-2016', 12, 4, Neuwmann, Rhode Island);
-insert into game values(118270, '05-Nov-2016', 15, 1, Neuwmann, Hofstra);
-insert into game values(118275, '05-Nov-2016', 5, 1, Neuwmann, Farmingdale);
-insert into game values(118299, '06-Nov-2016', 7, 2, Massachusetts, Neuwmann);
-insert into game values(118303, '06-Nov-2016', 12, 3, Neumann, Rhode Island);
-insert into game values(118320, '19-Nov-2016', 11, 1, Neumann, Temple);
-insert into game values(118323, '19-Nov-2016', 6, 9, Neumann, Farmingdale);
-insert into game values(118315, '19-Nov-2016', 1, 10, West Chester, Neumann);
-insert into game values(118167, '11-Feb-2017', 9, 2, Neumann, Robert Morris);
-insert into game values(118171, '11-Feb-2017', 10, 4, Neumann, Temple);
-insert into game values(118180, '12-Feb-2017', 12, 1, Neumann, Robert Morris);
-insert into game values(118488, '17-Feb-2017', 9, 2, Neumann, Cortland);
-insert into game values(118520, '18-Feb-2017', 12, 0, Neumann, Cortland);
-insert into game values(118510, '18-Feb-2017', 12, 1, Neumann, Hofstra);
-insert into game values(118548, '19-Feb-2017', 5, 11, Massachusetts, Neumann);
-insert into game values(117934, '15-Oct-2016', 6, 9, Rhode Island, Farmingdale);
-insert into game values(117940, '15-Oct-2016', 2, 6, Massachusetts, Farmingdale);
-insert into game values(117944, '15-Oct-2016', 2, 4, Cortland, Farmingdale);
-insert into game values(117951, '16-Oct-2016', 3, 4, Rhode Island, Farmingdale);
-insert into game values(118276, '05-Nov-2016', 2, 5, Massachusetts, Farmingdale);
-insert into game values(118267, '05-Nov-2016', 1, 5, Rowan, Farmingdale);
-insert into game values(118271, '05-Nov-2016', 1, 8, Cortland, Farmingdale);
-insert into game values(118275, '05-Nov-2016', 1, 5, Farmingdale, Neumann);
-insert into game values(118318, '19-Nov-2016', 0, 6, Temple, Farmingdale);
-insert into game values(118321, '19-Nov-2016', 2, 3, Farmingdale, West Chester);
-insert into game values(118323, '19-Nov-2016', 6, 9, Neumann, Farmingdale);
-insert into game values(118329, '20-Nov-2016', 3, 4, Farmingdale, West Chester);
-insert into game values(118134, '28-Jan-2017', 8, 0, Farmingdale, Hofstra);
-insert into game values(118125, '28-Jan-2017', 8, 1, Farmingdale, Temple);
-insert into game values(118138, '29-Jan-2017', 3, 5, Hofstra, Farmingdale);
-insert into game values(118504, '18-Feb-2017', 15, 3, Farmingdale, Robert Morris);
-insert into game values(118547, '19-Feb-2017', 12, 0, Farmingdale, Robert Morris);
-insert into game values(118550, '19-Feb-2017', 9, 0, Farmingdale, Rowan);
+insert into game values(118065, '22-Oct-2016', 6, 5, 57984, 57946);
+insert into game values(118075, '22-Oct-2016', 2, 8, 57937, 57984);
+insert into game values(118078, '22-Oct-2016', 7, 1, 57984, 57937);
+insert into game values(118278, '05-Nov-2016', 12, 4, 57984, 57958);
+insert into game values(118270, '05-Nov-2016', 15, 1, 57984, 57953);
+insert into game values(118275, '05-Nov-2016', 5, 1, 57984, 57950);
+insert into game values(118299, '06-Nov-2016', 7, 2, 57966, 57984);
+insert into game values(118303, '06-Nov-2016', 12, 3, 57984, 57958);
+insert into game values(118320, '19-Nov-2016', 11, 1, 57984, 57964);
+insert into game values(118323, '19-Nov-2016', 6, 9, 57984, 57950);
+insert into game values(118315, '19-Nov-2016', 1, 10, 57946, 57984);
+insert into game values(118167, '11-Feb-2017', 9, 2, 57984, 57959);
+insert into game values(118171, '11-Feb-2017', 10, 4, 57984, 57964);
+insert into game values(118180, '12-Feb-2017', 12, 1, 57984, 57959);
+insert into game values(118488, '17-Feb-2017', 9, 2, 57984, 57941);
+insert into game values(118520, '18-Feb-2017', 12, 0, 57984, 57941);
+insert into game values(118510, '18-Feb-2017', 12, 1, 57984, 57953);
+insert into game values(118548, '19-Feb-2017', 5, 11, 57966, 57984);
+insert into game values(117934, '15-Oct-2016', 6, 9, 57958, 57950);
+insert into game values(117940, '15-Oct-2016', 2, 6, 57966, 57950);
+insert into game values(117944, '15-Oct-2016', 2, 4, 57941, 57950);
+insert into game values(117951, '16-Oct-2016', 3, 4, 57958, 57950);
+insert into game values(118276, '05-Nov-2016', 2, 5, 57966, 57950);
+insert into game values(118267, '05-Nov-2016', 1, 5, 57937, 57950);
+insert into game values(118271, '05-Nov-2016', 1, 8, 57941, 57950);
+insert into game values(118275, '05-Nov-2016', 1, 5, 57950, 57984);
+insert into game values(118318, '19-Nov-2016', 0, 6, 57964, 57950);
+insert into game values(118321, '19-Nov-2016', 2, 3, 57950, 57946);
+insert into game values(118323, '19-Nov-2016', 6, 9, 57984, 57950);
+insert into game values(118329, '20-Nov-2016', 3, 4, 57950, 57946);
+insert into game values(118134, '28-Jan-2017', 8, 0, 57950, 57953);
+insert into game values(118125, '28-Jan-2017', 8, 1, 57950, 57964);
+insert into game values(118138, '29-Jan-2017', 3, 5, 57953, 57950);
+insert into game values(118504, '18-Feb-2017', 15, 3, 57950, 57959);
+insert into game values(118547, '19-Feb-2017', 12, 0, 57950, 57959);
+insert into game values(118550, '19-Feb-2017', 9, 0, 57950, 57937);
 
 /*GamesPlayed(pID, gID, goalsScored)*/
 -- Games Played
