@@ -46,7 +46,7 @@ FROM player p, team t
 WHERE t.teamID = p.tID AND p.weight > ANY
                                      (SELECT AVG(p.weight)
                                       FROM player p2)
-GROUP BY t.univName
+GROUP BY t.univName, p.lname, p.weight
 HAVING count(*) > 5
 ORDER BY p.weight;
 --SELECT p.name, p.age, t.teamName, s.points
