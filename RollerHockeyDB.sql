@@ -1,3 +1,6 @@
+-- Team 1
+-- Bekah Suttner, Gloire Rubambiza, Wesley Guthrie, David Brown
+-- 
 -- File: RollerHockeyDB.sql
 --
 -- Drop the tables (in case they already exist)
@@ -82,36 +85,25 @@ CREATE TABLE games_played (
 );
 --
 -- Add the foreign keys:
-ALTER TABLE player
-ADD FOREIGN KEY (tID) references team(teamID)
-Deferrable initially deferred;
-ALTER TABLE team
-ADD FOREIGN KEY (univName) references university(uName)
-Deferrable initially deferred;
-ALTER TABLE team_stats
-ADD FOREIGN KEY (tmID) references team(teamID)
-Deferrable initially deferred;
-ALTER TABLE locations
-ADD FOREIGN KEY (uniName) references university(uName)
-Deferrable initially deferred;
-ALTER TABLE games_played
-ADD FOREIGN KEY (pID) references player(playerID)
-Deferrable initially deferred;
-ALTER TABLE games_played
-ADD FOREIGN KEY (gID) references game(gameID)
-Deferrable initially deferred;
-ALTER TABLE games
-ADD FOREIGN KEY (hTID) references team(teamID)
-Deferrable initially deferred;
-ALTER TABLE games
-ADD FOREIGN KEY (aTID) references team(teamID)
-Deferrable initially deferred;
+CONSTRAINT teamIdForeignKey FOREIGN KEY(tID) references team(teamID);
+
+CONSTRAINT univNameForeignKey FOREIGN KEY(univName) references university(uName);
+
+CONSTRAINT tmIDForeignKey FOREIGN KEY(tmID) references team(teamID);
+
+CONSTRAINT uniNameForeignKey FOREIGN KEY(uniName) references university(uName);
+
+CONSTRAINT pIDForeignKey FOREIGN KEY(pID) references player(playerID);
+
+CONSTRAINT gIDForeignKey FOREIGN KEY(gID) references game(gameID);
+
+CONSTRAINT hTIDForeignKey FOREIGN KEY(hTID) references team(teamID);
+
+CONSTRAINT aTIDForeignKey FOREIGN KEY(aTID) references team(teamID);
 --
 -- ----------------------------------------------------------
 -- Populate the database
 -- ----------------------------------------------------------
---
---
 --
 
 -- Players
@@ -282,7 +274,7 @@ insert into game values(118550, '19-Feb-2017', 9, 0, 57950, 57937);
 /*GamesPlayed(pID, gID, goalsScored)*/
 -- Games Played
 insert into games_played values(139698, 118065, 0);
-insert into games_played values(1139674, 118065, 2);
+insert into games_played values(139674, 118065, 2);
 insert into games_played values(139675, 118065, 1);
 insert into games_played values(139676, 118065, 1);
 insert into games_played values(139683, 118065, 0);
