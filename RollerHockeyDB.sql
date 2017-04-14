@@ -28,12 +28,12 @@ CREATE TABLE player (
 /*Games(*gameID*, gDate, hscore, ascore, hTID, aTID)*/
 --
 CREATE TABLE game (
-  gameID    	number(5) PRIMARY KEY,
-  gDate       	date, /* standard date format is DD-MON-YY */
+  gameID    	number(6) PRIMARY KEY,
+  gDate       	date, /* standard date format is DD-MON-YYYY */
   hscore    	number(2),
   ascore    	number(2),
-  hTID		number(5),
-  aTID		number(5)
+  hTID			number(5),
+  aTID			number(5)
 );
 --
 /*University(*uName*, uSize, yearFounded)*/
@@ -111,7 +111,6 @@ Deferrable initially deferred;
 -- Populate the database
 -- ----------------------------------------------------------
 --
-alter session set  NLS_DATE_FORMAT = 'YYYY-MM-DD';
 --
 --
 
@@ -197,7 +196,7 @@ insert into team_stats values(2017, 57953, 4, 14, 8 );
 insert into team_stats values(2017, 57964, 3, 14, 7 );
 insert into team_stats values(2017, 57941, 1, 16, 3);
 
--- Universitys
+-- Universities
 insert into university values('Robert Morris University', 5000, 1921);
 insert into university values('Farmingdale State College', 9000, 1912);
 insert into university values('West Chester University of Pennsylvania', 16000, 1871);
@@ -243,25 +242,42 @@ insert into team values(57941, 'Red', 'Dragons', 'State University of New York a
 
 /*Games(gameID, gDate, hscore, ascore, hTID, aTID)*/
 -- Games
-insert into team values(118065, 10/22/2016, 6, 5);
-insert into team values(118075, 10/22/2016, 2, 8);
-insert into team values(118078, 10/22/2016, 7, 1);
-insert into team values(118278, 11/05/2016, 12, 4);
-insert into team values(118270, 11/05/2016, 15, 1);
-insert into team values(118275, 11/05/2016, 5, 1);
-insert into team values(118299, 11/06/2016, 7, 2);
-insert into team values(118303, 11/06/2016, 12, 3);
-insert into team values(118320, 11/19/2016, 11, 1);
-insert into team values(118323, 11/19/2016, 6, 9);
-insert into team values(118315, 11/19/2016, 1, 10);
-insert into team values(118167, 02/11/2017, 9, 2);
-insert into team values(118171, 02/11/2017, 10, 4);
-insert into team values(118180, 02/12/2017, 12, 1);
-insert into team values(118488, 02/17/2017, 9, 2);
-insert into team values(118520, 02/18/2017, 12, 0);
-insert into team values(118510, 02/18/2017, 12, 1);
-insert into team values(118548, 02/19/2017, 5, 11);
-
+insert into game values(118065, '22-Oct-2016', 6, 5, Neuwmann, West Chester);
+insert into game values(118075, '22-Oct-2016', 2, 8, Rowan, Neuwmann);
+insert into game values(118078, '22-Oct-2016', 7, 1, Neuwmann, Rowan);
+insert into game values(118278, '05-Nov-2016', 12, 4, Neuwmann, Rhode Island);
+insert into game values(118270, '05-Nov-2016', 15, 1, Neuwmann, Hofstra);
+insert into game values(118275, '05-Nov-2016', 5, 1, Neuwmann, Farmingdale);
+insert into game values(118299, '06-Nov-2016', 7, 2, Massachusetts, Neuwmann);
+insert into game values(118303, '06-Nov-2016', 12, 3, Neumann, Rhode Island);
+insert into game values(118320, '19-Nov-2016', 11, 1, Neumann, Temple);
+insert into game values(118323, '19-Nov-2016', 6, 9, Neumann, Farmingdale);
+insert into game values(118315, '19-Nov-2016', 1, 10, West Chester, Neumann);
+insert into game values(118167, '11-Feb-2017', 9, 2, Neumann, Robert Morris);
+insert into game values(118171, '11-Feb-2017', 10, 4, Neumann, Temple);
+insert into game values(118180, '12-Feb-2017', 12, 1, Neumann, Robert Morris);
+insert into game values(118488, '17-Feb-2017', 9, 2, Neumann, Cortland);
+insert into game values(118520, '18-Feb-2017', 12, 0, Neumann, Cortland);
+insert into game values(118510, '18-Feb-2017', 12, 1, Neumann, Hofstra);
+insert into game values(118548, '19-Feb-2017', 5, 11, Massachusetts, Neumann);
+insert into game values(117934, '15-Oct-2016', 6, 9, Rhode Island, Farmingdale);
+insert into game values(117940, '15-Oct-2016', 2, 6, Massachusetts, Farmingdale);
+insert into game values(117944, '15-Oct-2016', 2, 4, Cortland, Farmingdale);
+insert into game values(117951, '16-Oct-2016', 3, 4, Rhode Island, Farmingdale);
+insert into game values(118276, '05-Nov-2016', 2, 5, Massachusetts, Farmingdale);
+insert into game values(118267, '05-Nov-2016', 1, 5, Rowan, Farmingdale);
+insert into game values(118271, '05-Nov-2016', 1, 8, Cortland, Farmingdale);
+insert into game values(118275, '05-Nov-2016', 1, 5, Farmingdale, Neumann);
+insert into game values(118318, '19-Nov-2016', 0, 6, Temple, Farmingdale);
+insert into game values(118321, '19-Nov-2016', 2, 3, Farmingdale, West Chester);
+insert into game values(118323, '19-Nov-2016', 6, 9, Neumann, Farmingdale);
+insert into game values(118329, '20-Nov-2016', 3, 4, Farmingdale, West Chester);
+insert into game values(118134, '28-Jan-2017', 8, 0, Farmingdale, Hofstra);
+insert into game values(118125, '28-Jan-2017', 8, 1, Farmingdale, Temple);
+insert into game values(118138, '29-Jan-2017', 3, 5, Hofstra, Farmingdale);
+insert into game values(118504, '18-Feb-2017', 15, 3, Farmingdale, Robert Morris);
+insert into game values(118547, '19-Feb-2017', 12, 0, Farmingdale, Robert Morris);
+insert into game values(118550, '19-Feb-2017', 9, 0, Farmingdale, Rowan);
 
 /*GamesPlayed(pID, gID, goalsScored)*/
 -- Games Played
