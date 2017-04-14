@@ -23,7 +23,7 @@ CREATE TABLE university (
   yearFounded   number(4)
 );
 --
--- Team(*teamID*, jerseyColor, mascot, univName)*/
+-- Team(*teamID*, jerseyColor, mascot, univName)
 --
 CREATE TABLE team (
   teamID        number(5) PRIMARY KEY,
@@ -38,12 +38,12 @@ CREATE TABLE team (
 CREATE TABLE player (
   playerID    	number(6) PRIMARY KEY,
   fname     	varchar2(30),
-  lname    	varchar2(30),
+  lname    		varchar2(30),
   height     	number(3),
-  weight  	number(3),
+  weight  		number(3),
   num       	number(2),
   position    	char(1),
-  tID     	number(5),
+  tID     		number(5),
   CONSTRAINT ICteamIdForeignKey FOREIGN KEY (tID) REFERENCES team(teamID)
 );
 --
@@ -54,8 +54,8 @@ CREATE TABLE game (
   gDate       	date, /* standard date format is DD-MON-YYYY */
   hscore    	number(2),
   ascore    	number(2),
-  hTID		number(5),
-  aTID		number(5),
+  hTID			number(5),
+  aTID			number(5),
   CONSTRAINT IChTIDForeignKey FOREIGN KEY (hTID) REFERENCES team(teamID),
   CONSTRAINT ICaTIDForeignKey FOREIGN KEY (aTID) REFERENCES team(teamID)
 );
@@ -84,7 +84,7 @@ CREATE TABLE locations (
 -- GamesPlayed(pID, gID, goalsScored)
 --
 CREATE TABLE games_played (
-  pID    	number(6),
+  pID    		number(6),
   gID       	number(6),
   goalsScored 	number(2),
   primary key (pID,gID),
