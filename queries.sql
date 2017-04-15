@@ -40,9 +40,10 @@ FROM player p;
 SELECT MIN(p.weight)
 FROM player p;
 -- Find the average league weight, then find number of players each team has above that weight
+-- who are goalies
 -- GROUP BY, HAVING, and ORDER BY
 */
-SELECT DISTINCT p.lname
+SELECT DISTINCT p.lname, p.fname
 FROM player p, team t
 WHERE t.teamID = p.tID AND p.position = 'G' AND p.weight > ALL
                                      (SELECT AVG(p2.weight)
