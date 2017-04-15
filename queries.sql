@@ -75,6 +75,7 @@ ORDER BY p.lname;
 -- Non-Correlated subquery
 -- Find a university that was is not among the universities founded before the average
 -- finding year and the population is < 6000, order by year founded
+-- Output should be Robert Morris University / Neumann University
 SELECT U.uName, U.uSize, U.yearFounded
 FROM university U
 WHERE U.uSize < 6000 AND
@@ -82,11 +83,12 @@ WHERE U.uSize < 6000 AND
                        FROM university Utwo
                       )
 ORDER BY U.yearFounded;
--- Output should be Robert Morris University / Neumann University
+
 
 
 -- Division query
 -- Find which player(s) from the Neumann University played in all games 57984
+-- Output should be Fox Shane
 SELECT P.fname, P.lname, P.playerID
 FROM player P
 WHERE NOT EXISTS((SELECT G.gameID
@@ -96,28 +98,25 @@ WHERE NOT EXISTS((SELECT G.gameID
                  (SELECT GP.gID
                   FROM games_played GP
                   WHERE GP.pID = P.playerID AND P.tID = 57984));
--- Output should be Fox Shane
 
 
---
---
 -- Outer join query
--- Find the teamIDs and team names for all universities with more than one location
+-- Find the name and size for all universities with more than three locations
+-- Output should be University of Rhode Island & UniMass
 SELECT U.uName, U.usize, COUNT(*) AS campuses
 FROM university U LEFT OUTER JOIN locations L ON U.uName = L.uniName
 GROUP BY U.uName, U.usize
 HAVING count(*) > 3;
--- Output should be University of Rhode Island & UniMass
 
-/*
+
+
 -- Rank query
 -- The rank of the number 15 in the win category
 -- Output should be 2
-SELECT RANK (15) WITHIN GROUP
-(ORDER BY t.wins ASC)
+SELECT RANK (15) WITHIN GROUP (ORDER BY wins DESC) "rank15"
 FROM team_stats t;
 --
-*/
+
 -- Top N query
 -- The top 3 teams in the points category
 -- Output should be Neumann, Farmingdale, and West Chester
