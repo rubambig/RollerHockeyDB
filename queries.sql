@@ -1,23 +1,23 @@
 /*-- Join involving four relations
 --
 -- Output should be
-SELECT 
+SELECT
 FROM player p, team t, teamStats s, university u
-WHERE 
+WHERE
 -- A self join
--- 
--- Output should be 
+--
+-- Output should be
 SELECT p1.height, p1.lname, p1.tID
 FROM player p1, player p2
 WHERE p1.tID = p2.tID
 AND p1.height > p2.height
 ORDER BY p1.tID, p1.weight, p1.lname;
 -- UNION, INTERSECT, and/or MINUS
--- 
+--
 -- Output should be
 -- SUM
 -- Find the total number of games played in the season
--- Output should be 
+-- Output should be
 SELECT SUM(s.wins)
 FROM team_stats s, team t
 WHERE t.teamID = s.tmID;
@@ -30,12 +30,12 @@ WHERE t.teamID = s.tmID;
 --
 --
 -- MAX
--- Find the maximum 
+-- Find the maximum
 -- Output should be
 SELECT MAX(p.weight)
 FROM player p;
 -- MIN
--- Find the minimum 
+-- Find the minimum
 -- Output should be
 SELECT MIN(p.weight)
 FROM player p;
@@ -71,22 +71,45 @@ WHERE NOT EXISTS (SELECT gp.goalsScored
 		  AND gp.goalsScored < 20)
 ORDER BY p.lname;
 --
---
+*/
 -- Non-Correlated subquery
--- 
--- Output should be 
---
---
+-- Find a university that was is not among the universities founded before the average
+-- finding year and the population is < 6000, order by year founded
+SELECT U.uName, U.uSize, U.yearFounded
+FROM university U
+WHERE U.uSize < 6000 AND
+      U.yearFounded NOT IN ( SELECT AVG(Utwo.yearFounded)
+                       FROM university Utwo
+                      )
+ORDER BY U.yearFounded;
+-- Output should be Robert Morris University / Neumann University
+
+
 -- Division query
--- 
--- Output should be
+-- Find which player(s) from the Neumann University played in all games 57984
+SELECT P.fname, P.lname, P.playerID
+FROM player P
+WHERE NOT EXISTS((SELECT G.gameID
+                 FROM game G
+                 WHERE G.hTID = 57984 OR G.aTID = 57984)
+                 MINUS
+                 (SELECT GP.gID
+                  FROM games_played GP
+                  WHERE GP.pID = P.playerID AND P.tID = 57984));
+-- Output should be Fox Shane
+
+
 --
 --
 -- Outer join query
--- 
--- Output should be
---
---
+-- Find the teamIDs and team names for all universities with more than one location
+SELECT U.uName, U.usize, COUNT(*) AS campuses
+FROM university U LEFT OUTER JOIN locations L ON U.uName = L.uniName
+GROUP BY U.uName, U.usize
+HAVING count(*) > 3;
+-- Output should be University of Rhode Island & UniMass
+
+/*
 -- Rank query
 -- The rank of the number 15 in the win category
 -- Output should be 2
@@ -94,13 +117,13 @@ SELECT RANK (15) WITHIN GROUP
 (ORDER BY t.wins ASC)
 FROM team_stats t;
 --
---
+*/
 -- Top N query
--- The top 3 teams in the points category 
+-- The top 3 teams in the points category
 -- Output should be Neumann, Farmingdale, and West Chester
-SELECT t.univName, s.points
-FROM (SELECT *
-      FROM team t, team_stats s
-      WHERE t.teamId = s.tmID
-      ORDER BY s.points)
-WHERE ROWNUM < 3;*/
+SELECT T.univName, T.jerseyColor, T.mascot
+FROM team T
+WHERE T.teamID IN (SELECT TS.tmID
+                   FROM (SELECT tmID FROM team_stats ORDER BY  points DESC) TS
+                   WHERE ROWNUM < 4)
+ORDER BY T.univName;

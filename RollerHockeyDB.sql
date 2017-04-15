@@ -1,6 +1,6 @@
 -- Team 1
 -- Bekah Suttner, Gloire Rubambiza, Wesley Guthrie, David Brown
--- 
+--
 -- File: RollerHockeyDB.sql
 --
 -- Drop the tables (in case they already exist)
@@ -223,53 +223,28 @@ insert into team_stats values(2017, 57964, 3, 14, 7 );
 insert into team_stats values(2017, 57941, 1, 16, 3);
 --
 -- Games
-insert into game values(118065, '22-Oct-2016', 6, 5, 57984, 57946);
-insert into game values(118075, '22-Oct-2016', 2, 8, 57937, 57984);
-insert into game values(118078, '22-Oct-2016', 7, 1, 57984, 57937);
-insert into game values(118278, '05-Nov-2016', 12, 4, 57984, 57958);
-insert into game values(118270, '05-Nov-2016', 15, 1, 57984, 57953);
-insert into game values(118275, '05-Nov-2016', 5, 1, 57984, 57950);
-insert into game values(118299, '06-Nov-2016', 7, 2, 57966, 57984);
-insert into game values(118303, '06-Nov-2016', 12, 3, 57984, 57958);
-insert into game values(118320, '19-Nov-2016', 11, 1, 57984, 57964);
-insert into game values(118323, '19-Nov-2016', 6, 9, 57984, 57950);
-insert into game values(118315, '19-Nov-2016', 1, 10, 57946, 57984);
-insert into game values(118167, '11-Feb-2017', 9, 2, 57984, 57959);
-insert into game values(118171, '11-Feb-2017', 10, 4, 57984, 57964);
-insert into game values(118180, '12-Feb-2017', 12, 1, 57984, 57959);
-insert into game values(118488, '17-Feb-2017', 9, 2, 57984, 57941);
-insert into game values(118520, '18-Feb-2017', 12, 0, 57984, 57941);
-insert into game values(118510, '18-Feb-2017', 12, 1, 57984, 57953);
-insert into game values(118548, '19-Feb-2017', 5, 11, 57966, 57984);
-insert into game values(117934, '15-Oct-2016', 6, 9, 57958, 57950);
-insert into game values(117940, '15-Oct-2016', 2, 6, 57966, 57950);
-insert into game values(117944, '15-Oct-2016', 2, 4, 57941, 57950);
-insert into game values(117951, '16-Oct-2016', 3, 4, 57958, 57950);
-insert into game values(118276, '05-Nov-2016', 2, 5, 57966, 57950);
-insert into game values(118267, '05-Nov-2016', 1, 5, 57937, 57950);
-insert into game values(118271, '05-Nov-2016', 1, 8, 57941, 57950);
-insert into game values(118318, '19-Nov-2016', 0, 6, 57964, 57950);
-insert into game values(118321, '19-Nov-2016', 2, 3, 57950, 57946);
-insert into game values(118329, '20-Nov-2016', 3, 4, 57950, 57946);
-insert into game values(118134, '28-Jan-2017', 8, 0, 57950, 57953);
-insert into game values(118125, '28-Jan-2017', 8, 1, 57950, 57964);
-insert into game values(118138, '29-Jan-2017', 3, 5, 57953, 57950);
-insert into game values(118504, '18-Feb-2017', 15, 3, 57950, 57959);
-insert into game values(118547, '19-Feb-2017', 12, 0, 57950, 57959);
-insert into game values(118550, '19-Feb-2017', 9, 0, 57950, 57937);
+insert into game values(511, '22-Nov-2016', 3, 0, 57984, 57966);
+insert into game values(512, '28-Nov-2016', 2, 3, 57958, 57984);
+insert into game values(513, '30-Nov-2016', 3, 1, 57984, 57946);
 --
 -- Games Played
-insert into games_played values(139698, 118065, 0);
-insert into games_played values(139674, 118065, 2);
-insert into games_played values(139675, 118065, 1);
-insert into games_played values(139676, 118065, 1);
-insert into games_played values(139683, 118065, 0);
-insert into games_played values(139687, 118065, 1);
-insert into games_played values(139678, 118065, 0);
-insert into games_played values(139707, 118065, 0);
-insert into games_played values(139681, 118065, 0);
-insert into games_played values(139682, 118065, 0);
-insert into games_played values(139684, 118065, 0);
+insert into games_played values(138969, 511, 3);
+insert into games_played values(138966, 511, 0);
+insert into games_played values(138970, 511, 0);
+insert into games_played values(138942, 511, 0);
+insert into games_played values(138962, 511, 0);
+  -- Skipping Ryan
+insert into games_played values(138969, 512, 1);
+insert into games_played values(138970, 512, 0);
+insert into games_played values(138942, 512, 0);
+insert into games_played values(138962, 512, 2);
+insert into games_played values(139026, 512, 0);
+  -- Skipping Sean
+insert into games_played values(138969, 513, 2);
+insert into games_played values(138966, 513, 0);
+insert into games_played values(139009, 513, 0);
+insert into games_played values(138965, 513, 1);
+insert into games_played values(139026, 513, 0);
 --
 --
 COMMIT;
