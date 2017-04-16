@@ -225,7 +225,7 @@ insert into team_stats values(2017, 57941, 1, 16, 3);
 -- Games
 insert into game values(511, '22-Nov-2016', 3, 0, 57984, 57966);
 insert into game values(512, '28-Nov-2016', 2, 3, 57958, 57984);
-insert into game values(513, '30-Nov-2016', 3, 1, 57984, 57946);
+insert into game values(513, '30-Nov-2016', 5, 1, 57984, 57946);
 --
 -- Games Played
 insert into games_played values(138969, 511, 3);
@@ -243,7 +243,7 @@ insert into games_played values(139026, 512, 0);
 insert into games_played values(138969, 513, 2);
 insert into games_played values(138966, 513, 0);
 insert into games_played values(139009, 513, 0);
-insert into games_played values(138965, 513, 1);
+insert into games_played values(138965, 513, 3);
 insert into games_played values(139026, 513, 0);
 --
 --
