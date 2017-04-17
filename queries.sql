@@ -9,15 +9,20 @@ WHERE P.tID = T.teamID AND T.teamID = S.tmID and T.univName = U.uName
 ORDER BY P.lname;
 
 
-/*
 -- A self join
---
+-- Find all of the pairs of players on Neumann that weigh more than 200 
+-- pounds, where the first player taller and weighes more than the second player
 -- Output should be
-SELECT p1.height, p1.lname, p1.tID
+SELECT p1.lname, p1.weight, p1.height, p2.lname, p2.weight, p2.height
 FROM player p1, player p2
-WHERE p1.tID = p2.tID
+WHERE p1.weight > 200
+AND p1.weight > p2.weight
 AND p1.height > p2.height
-ORDER BY p1.tID, p1.weight, p1.lname;
+AND p1.tID = 57984 
+AND p1.tID = p2.tID;
+
+
+
 -- UNION, INTERSECT, and/or MINUS
 --
 -- Output should be
@@ -28,13 +33,6 @@ SELECT SUM(s.wins)
 FROM team_stats s, team t
 WHERE t.teamID = s.tmID;
 
---
---
--- MAX
--- Find the maximum
--- Output should be
-SELECT MAX(p.weight)
-FROM player p;
 -- MIN
 -- Find the minimum
 -- Output should be
@@ -42,7 +40,6 @@ SELECT MIN(p.weight)
 FROM player p;
 
 
-*/
 -- AVG, INTERSECT
 -- Find the name, and university of all forwards who teams are at the top
 -- and whose weights are below the league average
