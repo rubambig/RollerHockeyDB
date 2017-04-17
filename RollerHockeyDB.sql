@@ -44,7 +44,9 @@ CREATE TABLE player (
   num       	number(2),
   position    	char(1),
   tID     		number(5),
-  CONSTRAINT ICteamIdForeignKey FOREIGN KEY (tID) REFERENCES team(teamID)
+  CONSTRAINT ICteamIdForeignKey FOREIGN KEY (tID) REFERENCES team(teamID),
+  CONSTRAINT ICnumber CHECK (num > 0 OR num <= 99),
+  CONSTRAINT ICnumbergoalie CHECK (NOT (num < 30 AND position = 'G'))
 );
 --
 -- Games(*gameID*, gDate, hscore, ascore, hTID, aTID)
@@ -247,4 +249,5 @@ insert into games_played values(138965, 513, 3);
 insert into games_played values(139026, 513, 0);
 --
 --
+insert into player values (	123456,	'Gloire',	'Rubambiza',	71,	140,	100,	'G',	57958	);
 COMMIT;
