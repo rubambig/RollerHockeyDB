@@ -1,4 +1,3 @@
-SQL> SET ECHO ON
 SQL> 
 SQL> /*
 SQL> CIS 353 - 01 - Database Design Project
@@ -158,22 +157,22 @@ SQL> insert into team values(57966, 'Maroon', 'Minuteman', 'University of Massac
 SQL> insert into team values(57958, 'Dark Blue', 'Rams', 'University of Rhode Island');
 SQL> insert into team values(57959, 'Navy', 'Colonials', 'Robert Morris University');
 SQL> 
-SQL> insert into player values (     138942, 'Tyler',	     'Kraft',	     70,     185,    16,     'F',    57984   );
-SQL> insert into player values (     138970, 'Sean', 'Phelan',	     72,     200,    96,     'F',    57984   );
-SQL> insert into player values (     138962, 'Nicholas',     'DeSalvo',      66,     145,    11,     'F',    57984   );
-SQL> insert into player values (     141568, 'Gregory',      'Saklad',	     67,     160,    97,     'F',    57984   );
-SQL> insert into player values (     138965, 'Michael',      'Strofe',	     70,     225,    26,     'F',    57984   );
-SQL> insert into player values (     141565, 'Derek',	     'Schultz',      73,     170,    98,     'F',    57984   );
-SQL> insert into player values (     138969, 'Shane',	     'Fox',  70,     170,    13,     'D',    57984   );
-SQL> insert into player values (     138966, 'Ryan', 'Carr', 74,     190,    23,     'D',    57984   );
-SQL> insert into player values (     139026, 'Andy', 'Zubak',	     71,     174,    28,     'D',    57984   );
-SQL> insert into player values (     139009, 'Adam', 'Goggio',	     76,     175,    37,     'G',    57984   );
-SQL> insert into player values (     139715, 'Luc',  'Corso',	     70,     175,    11,     'F',    57950   );
-SQL> insert into player values (     140701, 'Matthew',      'O~Shaughnessy',	     69,     160,    91,     'F',    57950   );
-SQL> insert into player values (     139458, 'Rhys', 'Marcel',	     71,     180,    2,      'F',    57966   );
-SQL> insert into player values (     139315, 'Justin',	     'O~Connell',    74,     185,    12,     'D',    57966   );
-SQL> insert into player values (     139633, 'Will', 'Lalor',	     70,     175,    47,     'F',    57958   );
-SQL> insert into player values (     139602, 'Ryan', 'O~Regan',      69,     150,    5,      'F',    57958   );
+SQL> insert into player values (138942, 'Tyler', 'Kraft', 70, 185, 16, 'F', 57984);
+SQL> insert into player values (138970, 'Sean', 'Phelan', 72, 200, 96, 'F', 57984);
+SQL> insert into player values (138962, 'Nicholas', 'DeSalvo', 66, 145, 11, 'F', 57984);
+SQL> insert into player values (141568, 'Gregory', 'Saklad', 67, 160, 97, 'F', 57984);
+SQL> insert into player values (138965, 'Michael', 'Strofe', 70, 225, 26, 'F', 57984);
+SQL> insert into player values (141565, 'Derek', 'Schultz', 73, 170, 98, 'F', 57984);
+SQL> insert into player values (138969, 'Shane', 'Fox', 70, 170, 13, 'D', 57984);
+SQL> insert into player values (138966, 'Ryan', 'Carr', 74, 190, 23, 'D', 57984);
+SQL> insert into player values (139026, 'Andy', 'Zubak', 71, 174, 28, 'D', 57984);
+SQL> insert into player values (139009, 'Adam', 'Goggio', 76, 175, 37, 'G', 57984);
+SQL> insert into player values (139715, 'Luc', 'Corso', 70, 175, 11, 'F', 57950);
+SQL> insert into player values (140701, 'Matthew', 'O~Shaughnessy', 69, 160, 91, 'F', 57950);
+SQL> insert into player values (139458, 'Rhys', 'Marcel', 71, 180, 2, 'F', 57966);
+SQL> insert into player values (139315, 'Justin', 'O~Connell', 74, 185, 12, 'D', 57966);
+SQL> insert into player values (139633, 'Will', 'Lalor', 70, 175, 47, 'F', 57958);
+SQL> insert into player values (139602, 'Ryan', 'O~Regan', 69, 150, 5, 'F', 57958);
 SQL> 
 SQL> insert into locations values('Robert Morris University', 'Moon, PA');
 SQL> insert into locations values('Farmingdale State College', 'Farmingdale, NY');
@@ -185,11 +184,11 @@ SQL> insert into locations values('University of Rhode Island', 'Providence, RI'
 SQL> insert into locations values('University of Rhode Island', 'Narragansett, RI');
 SQL> insert into locations values('Neumann University', 'Aston, PA' );
 SQL> 
-SQL> insert into team_stats values(2017, 57984, 16, 2, 32 );
-SQL> insert into team_stats values(2017, 57950, 15, 3, 30 );
-SQL> insert into team_stats values(2017, 57966, 13, 5, 26 );
-SQL> insert into team_stats values(2017, 57958, 11, 6, 23 );
-SQL> insert into team_stats values(2017, 57959, 4, 13, 9 );
+SQL> insert into team_stats values(2017, 57984, 16, 2, 32);
+SQL> insert into team_stats values(2017, 57950, 15, 3, 30);
+SQL> insert into team_stats values(2017, 57966, 13, 5, 26);
+SQL> insert into team_stats values(2017, 57958, 11, 6, 23);
+SQL> insert into team_stats values(2017, 57959, 4, 13, 9);
 SQL> 
 SQL> insert into game values(511, '22-Nov-2016', 3, 0, 57984, 57966);
 SQL> insert into game values(512, '28-Nov-2016', 2, 3, 57958, 57984);
@@ -443,16 +442,16 @@ SQL>   Database Queries
 SQL> */
 SQL> /*
 SQL>  Q1 - Join Involving Four Relations
-SQL> For all the players who weigh more than 180lbs, whose team is top 2 in the
-SQL> league and a university population of less than 10,000, find the last name,
-SQL> university name, total points, university name, and university size, order
-SQL> by the last name.
+SQL> For all the players who weigh more than 180lbs, whose team has points greater
+SQL> than or equal to 30 and a university population of less than 10,000, find the
+SQL> last name, university name, total points, university name, and university size,
+SQL> order by the last name.
 SQL> */
 SQL> 
 SQL> SELECT P.lname, U.uName, S.points, U.usize
   2  FROM player P, team T, team_stats S, university U
   3  WHERE P.tID = T.teamID AND T.teamID = S.tmID AND T.univName = U.uName
-  4  	   AND S.points >= 30 AND U.Usize < 5000 AND P.weight > 180
+  4  	   AND S.points >= 30 AND U.Usize < 10000 AND P.weight >= 175
   5  ORDER BY P.lname;
 
 LNAME                                                                           
@@ -462,10 +461,10 @@ UNAME                                                  POINTS      USIZE
 Carr                                                                            
 Neumann University                                         32       3000        
                                                                                 
-Kraft                                                                           
-Neumann University                                         32       3000        
+Corso                                                                           
+Farmingdale State College                                  30       9000        
                                                                                 
-Phelan                                                                          
+Goggio                                                                          
 Neumann University                                         32       3000        
                                                                                 
 
@@ -473,19 +472,25 @@ LNAME
 ------------------------------                                                  
 UNAME                                                  POINTS      USIZE        
 -------------------------------------------------- ---------- ----------        
+Kraft                                                                           
+Neumann University                                         32       3000        
+                                                                                
+Phelan                                                                          
+Neumann University                                         32       3000        
+                                                                                
 Strofe                                                                          
 Neumann University                                         32       3000        
                                                                                 
 
-4 rows selected.
+6 rows selected.
 
 SQL> 
 SQL> /*
 SQL> Q2 - A Self-Join
-SQL> For all pairs of players on Neumann that weigh more than 200
-SQL> pounds, and the first player is taller and weighes more than the second player,
-SQL> find the last name and weights of each pair.
-SQL> Output should be Strofe/Desalvo && Strofe/Saklad
+SQL> For all pairs of players on Neumann with the first player weighing more than
+SQL> 200 pounds, and the first player is taller and weighs more than the second
+SQL> player, find the last name and weights of each pair.
+SQL> Output should be Strofe/Desalvo & Strofe/Saklad
 SQL> */
 SQL> SELECT p1.lname, p1.weight, p1.height, p2.lname, p2.weight, p2.height
   2  FROM player p1, player p2
@@ -510,7 +515,7 @@ SQL>
 SQL> /*
 SQL>  Q3 - MIN
 SQL> Find the minimum player weight in the league.
-SQL> Output should be 125
+SQL> Output should be 145
 SQL> */
 SQL> SELECT MIN(p.weight)
   2  FROM player p;
@@ -524,8 +529,8 @@ MIN(P.WEIGHT)
 SQL> 
 SQL> /*
 SQL> Q4 - AVG, INTERSECT
-SQL> For all forwards whose teams are at the top and weight below the league average,
-SQL> find the first name, last name, university name.
+SQL> For all forwards whose team is the top team in the league and weight
+SQL> below the league average, find the first name, last name, university name.
 SQL> Output should be Schultz, Saklad, & DeSalvo
 SQL> */
 SQL> SELECT p.fname, p.lname, t.univName
@@ -557,7 +562,7 @@ Neumann University
 SQL> 
 SQL> /*
 SQL> Q5 LIKE
-SQL> For all players whose names contain ~O and belong to teams with more than
+SQL> For all players whose names contain O~ and belong to teams with more than
 SQL> 25 points, find the names, university name, and points, order by total the points.
 SQL> Output should be O~Shaughnessy and O~Connell
 SQL> */
@@ -585,7 +590,7 @@ SQL> /*
 SQL> Q6 - Correlated subquery
 SQL> For every player who scored at least 2 goals in Neumann's games, find the
 SQL> playerID, last name, height and position.
-SQL> Output should be DeSalvo and Fox
+SQL> Output should be DeSalvo, Fox, and Strofe
 SQL> */
 SQL> SELECT DISTINCT p.playerID, p.lname, p.height, p.position
   2  FROM player p
@@ -605,10 +610,10 @@ SQL> SELECT DISTINCT p.playerID, p.lname, p.height, p.position
 SQL> 
 SQL> /*
 SQL> Q7 - Non-Correlated Qubquery
-SQL> For all universities not among the universities founded before the average
-SQL> finding year and a student population is less than 6000, find the name,
+SQL> For all universities founded after the average university finding year
+SQL> and a student population less than 6000, find the name,
 SQL> size, and yearfound, order by year founded
-SQL> Output should be Robert Morris University / Neumann University
+SQL> Output should be Robert Morris University and Neumann University
 SQL> */
 SQL> SELECT U.uName, U.uSize, U.yearFounded
   2  FROM university U
@@ -630,7 +635,7 @@ SQL> /*
 SQL> Q8 - Division Query
 SQL> For all players that played in every Neumann University game, find the first
 SQL> name, last name, playerID.
-SQL> Output should be Fox Shane
+SQL> Output should be Shane Fox
 SQL> */
 SQL> SELECT P.fname, P.lname, P.playerID
   2  FROM player P
@@ -653,7 +658,7 @@ SQL> /*
 SQL> Q9 - OUTER JOIN, GROUP BY, HAVING, and ORDER BY
 SQL> For all universities with more than two locations, find the name, size and
 SQL> number of campuses, order by university name
-SQL> Output should be University of Rhode Island & UniMass
+SQL> Output should be University of Rhode Island & Univeristy of Massachusetts
 SQL> */
 SQL> SELECT U.uName, U.usize, COUNT(*) AS campuses
   2  FROM university U LEFT OUTER JOIN locations L ON U.uName = L.uniName
@@ -688,7 +693,7 @@ SQL>
 SQL> /*
 SQL> Q11 - Top N query
 SQL> For the top 2 teams in the points category, Find the name, jerseyColor and mascot.
-SQL> Output should be Neumann, Farmingdale
+SQL> Output should be Neumann State College and Farmingdale University
 SQL> */
 SQL> SELECT DISTINCT T.univName, T.jerseyColor, T.mascot
   2  FROM team T
@@ -718,7 +723,7 @@ SQL> insert into player values (     139613, 'Evan', 'Hosney',	     70,     160,
 insert into player values (	139613,	'Evan',	'Hosney',	70,	160,	1,	'G',	57958	)
 *
 ERROR at line 1:
-ORA-02290: check constraint (RUBAMBIG.ICJERSEYNUMBERGOALIE) violated 
+ORA-02290: check constraint (BROWDAVI.ICJERSEYNUMBERGOALIE) violated 
 
 
 SQL> 
@@ -729,7 +734,7 @@ SQL> insert into player values (     123456, 'Gloire',	     'Rubambiza',    71, 
 insert into player values (	123456,	'Gloire',	'Rubambiza',	71,	140,	100,	'G',	57958	)
 *
 ERROR at line 1:
-ORA-02290: check constraint (RUBAMBIG.ICJERSEYNUMBER) violated 
+ORA-02290: check constraint (BROWDAVI.ICJERSEYNUMBER) violated 
 
 
 SQL> 
@@ -740,7 +745,7 @@ SQL> insert into university values ('G.V.S.U', 25000, 1960);
 insert into university values ('G.V.S.U', 25000, 1960)
 *
 ERROR at line 1:
-ORA-02290: check constraint (RUBAMBIG.ICUNIVNAMENODOTS) violated 
+ORA-02290: check constraint (BROWDAVI.ICUNIVNAMENODOTS) violated 
 
 
 SQL> 
@@ -751,7 +756,7 @@ SQL> insert into team values(51984, 'Red', 'I Love China', 'Trump University');
 insert into team values(51984, 'Red', 'I Love China', 'Trump University')
 *
 ERROR at line 1:
-ORA-02291: integrity constraint (RUBAMBIG.ICUNIVNAMEFOREIGNKEY) violated - 
+ORA-02291: integrity constraint (BROWDAVI.ICUNIVNAMEFOREIGNKEY) violated - 
 parent key not found 
 
 
@@ -763,7 +768,7 @@ SQL> insert into game values(514, '30-Nov-2016', 5, 1, 57922, 57946);
 insert into game values(514, '30-Nov-2016', 5, 1, 57922, 57946)
 *
 ERROR at line 1:
-ORA-02291: integrity constraint (RUBAMBIG.ICATIDFOREIGNKEY) violated - parent 
+ORA-02291: integrity constraint (BROWDAVI.ICATIDFOREIGNKEY) violated - parent 
 key not found 
 
 
@@ -775,7 +780,7 @@ SQL> insert into games_played values(139011, 513, 0);
 insert into games_played values(139011, 513, 0)
 *
 ERROR at line 1:
-ORA-02291: integrity constraint (RUBAMBIG.ICPIDFOREIGNKEY) violated - parent 
+ORA-02291: integrity constraint (BROWDAVI.ICPIDFOREIGNKEY) violated - parent 
 key not found 
 
 
@@ -787,7 +792,7 @@ SQL> insert into locations values('Grand Valley State University', 'Grand Rapids
 insert into locations values('Grand Valley State University', 'Grand Rapids, MI')
 *
 ERROR at line 1:
-ORA-02291: integrity constraint (RUBAMBIG.ICUNINAMEFOREIGNKEY) violated - 
+ORA-02291: integrity constraint (BROWDAVI.ICUNINAMEFOREIGNKEY) violated - 
 parent key not found 
 
 
@@ -799,7 +804,7 @@ SQL> insert into team_stats values(2017, 57901, 3, 14, 7 );
 insert into team_stats values(2017, 57901, 3, 14, 7 )
 *
 ERROR at line 1:
-ORA-02291: integrity constraint (RUBAMBIG.ICTMIDFOREIGNKEY) violated - parent 
+ORA-02291: integrity constraint (BROWDAVI.ICTMIDFOREIGNKEY) violated - parent 
 key not found 
 
 

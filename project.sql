@@ -117,22 +117,22 @@ insert into team values(57966, 'Maroon', 'Minuteman', 'University of Massachuset
 insert into team values(57958, 'Dark Blue', 'Rams', 'University of Rhode Island');
 insert into team values(57959, 'Navy', 'Colonials', 'Robert Morris University');
 
-insert into player values (	138942,	'Tyler',	'Kraft',	70,	185,	16,	'F',	57984	);
-insert into player values (	138970,	'Sean',	'Phelan',	72,	200,	96,	'F',	57984	);
-insert into player values (	138962,	'Nicholas',	'DeSalvo',	66,	145,	11,	'F',	57984	);
-insert into player values (	141568,	'Gregory',	'Saklad',	67,	160,	97,	'F',	57984	);
-insert into player values (	138965,	'Michael',	'Strofe',	70,	225,	26,	'F',	57984	);
-insert into player values (	141565,	'Derek',	'Schultz',	73,	170,	98,	'F',	57984	);
-insert into player values (	138969,	'Shane',	'Fox',	70,	170,	13,	'D',	57984	);
-insert into player values (	138966,	'Ryan',	'Carr',	74,	190,	23,	'D',	57984	);
-insert into player values (	139026,	'Andy',	'Zubak',	71,	174,	28,	'D',	57984	);
-insert into player values (	139009,	'Adam',	'Goggio',	76,	175,	37,	'G',	57984	);
-insert into player values (	139715,	'Luc',	'Corso',	70,	175,	11,	'F',	57950	);
-insert into player values (	140701,	'Matthew',	'O~Shaughnessy',	69,	160,	91,	'F',	57950	);
-insert into player values (	139458,	'Rhys',	'Marcel',	71,	180,	2,	'F',	57966	);
-insert into player values (	139315,	'Justin',	'O~Connell',	74,	185,	12,	'D',	57966	);
-insert into player values (	139633,	'Will',	'Lalor',	70,	175,	47,	'F',	57958	);
-insert into player values (	139602,	'Ryan',	'O~Regan',	69,	150,	5,	'F',	57958	);
+insert into player values (138942, 'Tyler', 'Kraft', 70, 185, 16, 'F', 57984);
+insert into player values (138970, 'Sean', 'Phelan', 72, 200, 96, 'F', 57984);
+insert into player values (138962, 'Nicholas', 'DeSalvo', 66, 145, 11, 'F', 57984);
+insert into player values (141568, 'Gregory', 'Saklad', 67, 160, 97, 'F', 57984);
+insert into player values (138965, 'Michael', 'Strofe', 70, 225, 26, 'F', 57984);
+insert into player values (141565, 'Derek', 'Schultz', 73, 170, 98, 'F', 57984);
+insert into player values (138969, 'Shane', 'Fox', 70, 170, 13, 'D', 57984);
+insert into player values (138966, 'Ryan', 'Carr', 74, 190, 23, 'D', 57984);
+insert into player values (139026, 'Andy', 'Zubak', 71, 174, 28, 'D', 57984);
+insert into player values (139009, 'Adam', 'Goggio', 76, 175, 37, 'G', 57984);
+insert into player values (139715, 'Luc', 'Corso', 70, 175, 11, 'F', 57950);
+insert into player values (140701, 'Matthew', 'O~Shaughnessy', 69, 160, 91, 'F', 57950);
+insert into player values (139458, 'Rhys', 'Marcel', 71, 180, 2, 'F', 57966);
+insert into player values (139315, 'Justin', 'O~Connell', 74, 185, 12, 'D', 57966);
+insert into player values (139633, 'Will', 'Lalor', 70, 175, 47, 'F', 57958);
+insert into player values (139602, 'Ryan', 'O~Regan', 69, 150, 5, 'F', 57958);
 
 insert into locations values('Robert Morris University', 'Moon, PA');
 insert into locations values('Farmingdale State College', 'Farmingdale, NY');
@@ -144,11 +144,11 @@ insert into locations values('University of Rhode Island', 'Providence, RI');
 insert into locations values('University of Rhode Island', 'Narragansett, RI');
 insert into locations values('Neumann University', 'Aston, PA' );
 
-insert into team_stats values(2017, 57984, 16, 2, 32 );
-insert into team_stats values(2017, 57950, 15, 3, 30 );
-insert into team_stats values(2017, 57966, 13, 5, 26 );
-insert into team_stats values(2017, 57958, 11, 6, 23 );
-insert into team_stats values(2017, 57959, 4, 13, 9 );
+insert into team_stats values(2017, 57984, 16, 2, 32);
+insert into team_stats values(2017, 57950, 15, 3, 30);
+insert into team_stats values(2017, 57966, 13, 5, 26);
+insert into team_stats values(2017, 57958, 11, 6, 23);
+insert into team_stats values(2017, 57959, 4, 13, 9);
 
 insert into game values(511, '22-Nov-2016', 3, 0, 57984, 57966);
 insert into game values(512, '28-Nov-2016', 2, 3, 57958, 57984);
@@ -189,24 +189,24 @@ SELECT * FROM games_played;
 */
 /*
  Q1 - Join Involving Four Relations
-For all the players who weigh more than 180lbs, whose team is top 2 in the
-league and a university population of less than 10,000, find the last name,
-university name, total points, university name, and university size, order
-by the last name.
+For all the players who weigh more than 180lbs, whose team has points greater 
+than or equal to 30 and a university population of less than 10,000, find the 
+last name, university name, total points, university name, and university size, 
+order by the last name.
 */
 
 SELECT P.lname, U.uName, S.points, U.usize
 FROM player P, team T, team_stats S, university U
 WHERE P.tID = T.teamID AND T.teamID = S.tmID AND T.univName = U.uName
-      AND S.points >= 30 AND U.Usize < 5000 AND P.weight > 180
+      AND S.points >= 30 AND U.Usize < 10000 AND P.weight >= 175
 ORDER BY P.lname;
 
 /*
 Q2 - A Self-Join
-For all pairs of players on Neumann that weigh more than 200
-pounds, and the first player is taller and weighes more than the second player,
-find the last name and weights of each pair.
-Output should be Strofe/Desalvo && Strofe/Saklad
+For all pairs of players on Neumann with the first player weighing more than
+200 pounds, and the first player is taller and weighs more than the second
+player, find the last name and weights of each pair.
+Output should be Strofe/Desalvo & Strofe/Saklad
 */
 SELECT p1.lname, p1.weight, p1.height, p2.lname, p2.weight, p2.height
 FROM player p1, player p2
@@ -217,15 +217,15 @@ WHERE p1.weight > 200 AND p1.weight > p2.weight AND
 /*
  Q3 - MIN
 Find the minimum player weight in the league.
-Output should be 125
+Output should be 145
 */
 SELECT MIN(p.weight)
 FROM player p;
 
 /*
 Q4 - AVG, INTERSECT
-For all forwards whose teams are at the top and weight below the league average,
-find the first name, last name, university name.
+For all forwards whose team is the top team in the league and weight
+below the league average, find the first name, last name, university name.
 Output should be Schultz, Saklad, & DeSalvo
 */
 SELECT p.fname, p.lname, t.univName
@@ -240,7 +240,7 @@ WHERE T.teamID = P.tID AND S.points > 30 AND T.teamID = S.tmID;
 
 /*
 Q5 LIKE
-For all players whose names contain ~O and belong to teams with more than
+For all players whose names contain O~ and belong to teams with more than
 25 points, find the names, university name, and points, order by total the points.
 Output should be O~Shaughnessy and O~Connell
 */
@@ -254,7 +254,7 @@ ORDER BY S.points;
 Q6 - Correlated subquery
 For every player who scored at least 2 goals in Neumann's games, find the
 playerID, last name, height and position.
-Output should be DeSalvo and Fox
+Output should be DeSalvo, Fox, and Strofe
 */
 SELECT DISTINCT p.playerID, p.lname, p.height, p.position
 FROM player p
@@ -265,10 +265,10 @@ ORDER BY p.lname;
 
 /*
 Q7 - Non-Correlated Qubquery
-For all universities not among the universities founded before the average
-finding year and a student population is less than 6000, find the name,
+For all universities founded after the average university finding year
+and a student population less than 6000, find the name,
 size, and yearfound, order by year founded
-Output should be Robert Morris University / Neumann University
+Output should be Robert Morris University and Neumann University
 */
 SELECT U.uName, U.uSize, U.yearFounded
 FROM university U
@@ -282,7 +282,7 @@ ORDER BY U.yearFounded;
 Q8 - Division Query
 For all players that played in every Neumann University game, find the first
 name, last name, playerID.
-Output should be Fox Shane
+Output should be Shane Fox
 */
 SELECT P.fname, P.lname, P.playerID
 FROM player P
@@ -298,7 +298,7 @@ WHERE NOT EXISTS((SELECT G.gameID
 Q9 - OUTER JOIN, GROUP BY, HAVING, and ORDER BY
 For all universities with more than two locations, find the name, size and
 number of campuses, order by university name
-Output should be University of Rhode Island & UniMass
+Output should be University of Rhode Island & Univeristy of Massachusetts
 */
 SELECT U.uName, U.usize, COUNT(*) AS campuses
 FROM university U LEFT OUTER JOIN locations L ON U.uName = L.uniName
@@ -318,7 +318,7 @@ FROM team_stats t;
 /*
 Q11 - Top N query
 For the top 2 teams in the points category, Find the name, jerseyColor and mascot.
-Output should be Neumann, Farmingdale
+Output should be Neumann State College and Farmingdale University
 */
 SELECT DISTINCT T.univName, T.jerseyColor, T.mascot
 FROM team T
