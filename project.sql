@@ -189,9 +189,9 @@ SELECT * FROM games_played;
 */
 /*
  Q1 - Join Involving Four Relations
-For all the players who weigh more than 180lbs, whose team has points greater 
+For all the players who weigh more than 175lbs, whose team has points greater 
 than or equal to 30 and a university population of less than 10,000, find the 
-last name, university name, total points, university name, and university size, 
+last name, university name, total points, and university size, 
 order by the last name.
 */
 
@@ -224,7 +224,7 @@ FROM player p;
 
 /*
 Q4 - AVG, INTERSECT
-For all forwards whose team is the top team in the league and weight
+For all forwards whose team has more than 30 points and weight
 below the league average, find the first name, last name, university name.
 Output should be Schultz, Saklad, & DeSalvo
 */

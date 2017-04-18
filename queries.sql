@@ -1,6 +1,6 @@
 -- Join involving four relations
--- Find all the players who weigh more than 180lbs, whose team is top 2 in the
--- league and a university population of less than 10,000
+-- Find all the players who weigh more than 180lbs, whose team has
+-- more than 30 pointsand a university population of less than 10,000
 -- Order by the last name
 -- Output should be all Car, Kraft, Phelan, and Strofe
 SELECT P.lname, U.uName, S.points, U.usize
@@ -31,7 +31,7 @@ FROM player p;
 
 
 -- AVG, INTERSECT
--- Find the name, and university of all forwards whose teams are at the top
+-- Find the name, and university of all forwards whose team has more than 30 points
 -- and whose weights are below the league average
 -- Output should be Schultz, Saklad, & DeSalvo
 SELECT p.fname, p.lname, t.univName
