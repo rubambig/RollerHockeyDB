@@ -1,0 +1,812 @@
+SQL> SET ECHO ON
+SQL> 
+SQL> /*
+SQL> CIS 353 - 01 - Database Design Project
+SQL> Team 1 - Winter 2017
+SQL> < David Brown >
+SQL> < Wesley Guthrie >
+SQL> < Gloire Rubambiza >
+SQL> < Rebekah Suttner >
+SQL> */
+SQL> 
+SQL> DROP TABLE university CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE team CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE player CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE game CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE team_stats CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE locations CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> DROP TABLE games_played CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> 
+SQL> /*
+SQL>  University(*uName*, uSize, yearFounded)
+SQL> */
+SQL> CREATE TABLE university (
+  2    uName	     varchar2(50) PRIMARY KEY,
+  3    uSize	     number(6),
+  4    yearFounded   number(4),
+  5    CONSTRAINT ICunivNameNODOTS CHECK(NOT(uName LIKE '%.%'))
+  6  );
+
+Table created.
+
+SQL> /*
+SQL>  Team(*teamID*, jerseyColor, mascot, univName)
+SQL> */
+SQL> CREATE TABLE team (
+  2    teamID	     number(5) PRIMARY KEY,
+  3    jerseyColor   varchar2(20),
+  4    mascot	     varchar2(30),
+  5    univName      varchar2(50),
+  6    CONSTRAINT ICunivNameForeignKey FOREIGN KEY (univName) REFERENCES university(uName)
+  7  );
+
+Table created.
+
+SQL> /*
+SQL>  Player(*playerID*, fname, lname, height, weight, num, position, tID)
+SQL> */
+SQL> CREATE TABLE player (
+  2    playerID      number(6) PRIMARY KEY,
+  3    fname	     varchar2(30),
+  4    lname		     varchar2(30),
+  5    height	     number(3),
+  6    weight		     number(3),
+  7    num	     number(3),
+  8    position      char(1),
+  9    tID		     number(5),
+ 10    CONSTRAINT ICteamIdForeignKey FOREIGN KEY (tID) REFERENCES team(teamID),
+ 11    CONSTRAINT ICjerseynumber CHECK (num > 0 AND num <= 99),
+ 12    CONSTRAINT ICjerseynumbergoalie CHECK (NOT (num < 30 AND position = 'G'))
+ 13  );
+
+Table created.
+
+SQL> /*
+SQL>  Games(*gameID*, gDate, hscore, ascore, hTID, aTID)
+SQL> */
+SQL> CREATE TABLE game (
+  2    gameID	     number(6) PRIMARY KEY,
+  3    gDate	     date, /* standard date format is DD-MON-YYYY */
+  4    hscore	     number(2),
+  5    ascore	     number(2),
+  6    hTID		     number(5),
+  7    aTID		     number(5),
+  8    CONSTRAINT IChTIDForeignKey FOREIGN KEY (hTID) REFERENCES team(teamID),
+  9    CONSTRAINT ICaTIDForeignKey FOREIGN KEY (aTID) REFERENCES team(teamID)
+ 10  );
+
+Table created.
+
+SQL> /*
+SQL>  TeamStats(*year, tmID*, wins, losses, points)
+SQL> */
+SQL> CREATE TABLE team_stats (
+  2    year	     number(4),
+  3    tmID	     number(5),
+  4    wins	     number(2),
+  5    losses	     number(2),
+  6    points	     number(2),
+  7    PRIMARY KEY (year,tmID),
+  8    CONSTRAINT ICtmIDForeignKey FOREIGN KEY (tmID) REFERENCES team(teamID)
+  9  );
+
+Table created.
+
+SQL> /*
+SQL>  Locations(*uniName , location*)
+SQL> */
+SQL> CREATE TABLE locations (
+  2    uniName	     varchar2(50),
+  3    location      varchar2(30),
+  4    primary key (uniName,location),
+  5    CONSTRAINT ICuniNameForeignKey FOREIGN KEY(uniName) REFERENCES university(uName)
+  6  );
+
+Table created.
+
+SQL> /*
+SQL>  GamesPlayed(pID, gID, goalsScored)
+SQL> */
+SQL> CREATE TABLE games_played (
+  2    pID		     number(6),
+  3    gID	     number(6),
+  4    goalsScored   number(2),
+  5    primary key (pID,gID),
+  6    CONSTRAINT ICpIDForeignKey FOREIGN KEY(pID) REFERENCES player(playerID),
+  7    CONSTRAINT ICgIDForeignKey FOREIGN KEY(gID) REFERENCES game(gameID)
+  8  );
+
+Table created.
+
+SQL> --------------------------------------------------------------------------------
+SQL> SET FEEDBACK OFF
+SQL> 
+SQL> /*
+SQL>   Populate the database
+SQL> */
+SQL> insert into university values('Robert Morris University', 5000, 1921);
+SQL> insert into university values('Farmingdale State College', 9000, 1912);
+SQL> insert into university values('West Chester University of Pennsylvania', 16000, 1871);
+SQL> insert into university values('University of Massachusetts', 79000 , 1863);
+SQL> insert into university values('University of Rhode Island', 16000, 1892);
+SQL> insert into university values('Neumann University', 3000, 1965);
+SQL> 
+SQL> insert into team values(57984, 'Navy', 'Knights', 'Neumann University');
+SQL> insert into team values(57950, 'Green', 'Rams', 'Farmingdale State College');
+SQL> insert into team values(57966, 'Maroon', 'Minuteman', 'University of Massachusetts');
+SQL> insert into team values(57958, 'Dark Blue', 'Rams', 'University of Rhode Island');
+SQL> insert into team values(57959, 'Navy', 'Colonials', 'Robert Morris University');
+SQL> 
+SQL> insert into player values (     138942, 'Tyler',	     'Kraft',	     70,     185,    16,     'F',    57984   );
+SQL> insert into player values (     138970, 'Sean', 'Phelan',	     72,     200,    96,     'F',    57984   );
+SQL> insert into player values (     138962, 'Nicholas',     'DeSalvo',      66,     145,    11,     'F',    57984   );
+SQL> insert into player values (     141568, 'Gregory',      'Saklad',	     67,     160,    97,     'F',    57984   );
+SQL> insert into player values (     138965, 'Michael',      'Strofe',	     70,     225,    26,     'F',    57984   );
+SQL> insert into player values (     141565, 'Derek',	     'Schultz',      73,     170,    98,     'F',    57984   );
+SQL> insert into player values (     138969, 'Shane',	     'Fox',  70,     170,    13,     'D',    57984   );
+SQL> insert into player values (     138966, 'Ryan', 'Carr', 74,     190,    23,     'D',    57984   );
+SQL> insert into player values (     139026, 'Andy', 'Zubak',	     71,     174,    28,     'D',    57984   );
+SQL> insert into player values (     139009, 'Adam', 'Goggio',	     76,     175,    37,     'G',    57984   );
+SQL> insert into player values (     139715, 'Luc',  'Corso',	     70,     175,    11,     'F',    57950   );
+SQL> insert into player values (     140701, 'Matthew',      'O~Shaughnessy',	     69,     160,    91,     'F',    57950   );
+SQL> insert into player values (     139458, 'Rhys', 'Marcel',	     71,     180,    2,      'F',    57966   );
+SQL> insert into player values (     139315, 'Justin',	     'O~Connell',    74,     185,    12,     'D',    57966   );
+SQL> insert into player values (     139633, 'Will', 'Lalor',	     70,     175,    47,     'F',    57958   );
+SQL> insert into player values (     139602, 'Ryan', 'O~Regan',      69,     150,    5,      'F',    57958   );
+SQL> 
+SQL> insert into locations values('Robert Morris University', 'Moon, PA');
+SQL> insert into locations values('Farmingdale State College', 'Farmingdale, NY');
+SQL> insert into locations values('University of Massachusetts', 'Amherst, MA' );
+SQL> insert into locations values('University of Massachusetts', 'Boston, MA' );
+SQL> insert into locations values('University of Massachusetts', 'North Dartmouth, MA' );
+SQL> insert into locations values('University of Rhode Island', 'Kingston, RI' );
+SQL> insert into locations values('University of Rhode Island', 'Providence, RI');
+SQL> insert into locations values('University of Rhode Island', 'Narragansett, RI');
+SQL> insert into locations values('Neumann University', 'Aston, PA' );
+SQL> 
+SQL> insert into team_stats values(2017, 57984, 16, 2, 32 );
+SQL> insert into team_stats values(2017, 57950, 15, 3, 30 );
+SQL> insert into team_stats values(2017, 57966, 13, 5, 26 );
+SQL> insert into team_stats values(2017, 57958, 11, 6, 23 );
+SQL> insert into team_stats values(2017, 57959, 4, 13, 9 );
+SQL> 
+SQL> insert into game values(511, '22-Nov-2016', 3, 0, 57984, 57966);
+SQL> insert into game values(512, '28-Nov-2016', 2, 3, 57958, 57984);
+SQL> insert into game values(513, '30-Nov-2016', 5, 1, 57984, 57958);
+SQL> 
+SQL> insert into games_played values(138969, 511, 3);
+SQL> insert into games_played values(138966, 511, 0);
+SQL> insert into games_played values(138970, 511, 0);
+SQL> insert into games_played values(138942, 511, 0);
+SQL> insert into games_played values(138962, 511, 0);
+SQL> insert into games_played values(138969, 512, 1);
+SQL> insert into games_played values(138970, 512, 0);
+SQL> insert into games_played values(138942, 512, 0);
+SQL> insert into games_played values(138962, 512, 2);
+SQL> insert into games_played values(139026, 512, 0);
+SQL> insert into games_played values(138969, 513, 2);
+SQL> insert into games_played values(138966, 513, 0);
+SQL> insert into games_played values(139009, 513, 0);
+SQL> insert into games_played values(138965, 513, 3);
+SQL> insert into games_played values(139026, 513, 0);
+SQL> -------------------------------------------------------------------------------
+SQL> SET FEEDBACK ON
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> /*
+SQL>   Printing out the databases
+SQL> */
+SQL> SELECT * FROM university;
+
+UNAME                                                   USIZE YEARFOUNDED       
+-------------------------------------------------- ---------- -----------       
+Robert Morris University                                 5000        1921       
+Farmingdale State College                                9000        1912       
+West Chester University of Pennsylvania                 16000        1871       
+University of Massachusetts                             79000        1863       
+University of Rhode Island                              16000        1892       
+Neumann University                                       3000        1965       
+
+6 rows selected.
+
+SQL> SELECT * FROM team;
+
+    TEAMID JERSEYCOLOR          MASCOT                                          
+---------- -------------------- ------------------------------                  
+UNIVNAME                                                                        
+--------------------------------------------------                              
+     57984 Navy                 Knights                                         
+Neumann University                                                              
+                                                                                
+     57950 Green                Rams                                            
+Farmingdale State College                                                       
+                                                                                
+     57966 Maroon               Minuteman                                       
+University of Massachusetts                                                     
+                                                                                
+
+    TEAMID JERSEYCOLOR          MASCOT                                          
+---------- -------------------- ------------------------------                  
+UNIVNAME                                                                        
+--------------------------------------------------                              
+     57958 Dark Blue            Rams                                            
+University of Rhode Island                                                      
+                                                                                
+     57959 Navy                 Colonials                                       
+Robert Morris University                                                        
+                                                                                
+
+5 rows selected.
+
+SQL> SELECT * FROM player;
+
+  PLAYERID FNAME                          LNAME                                 
+---------- ------------------------------ ------------------------------        
+    HEIGHT     WEIGHT        NUM P        TID                                   
+---------- ---------- ---------- - ----------                                   
+    138942 Tyler                          Kraft                                 
+        70        185         16 F      57984                                   
+                                                                                
+    138970 Sean                           Phelan                                
+        72        200         96 F      57984                                   
+                                                                                
+    138962 Nicholas                       DeSalvo                               
+        66        145         11 F      57984                                   
+                                                                                
+
+  PLAYERID FNAME                          LNAME                                 
+---------- ------------------------------ ------------------------------        
+    HEIGHT     WEIGHT        NUM P        TID                                   
+---------- ---------- ---------- - ----------                                   
+    141568 Gregory                        Saklad                                
+        67        160         97 F      57984                                   
+                                                                                
+    138965 Michael                        Strofe                                
+        70        225         26 F      57984                                   
+                                                                                
+    141565 Derek                          Schultz                               
+        73        170         98 F      57984                                   
+                                                                                
+
+  PLAYERID FNAME                          LNAME                                 
+---------- ------------------------------ ------------------------------        
+    HEIGHT     WEIGHT        NUM P        TID                                   
+---------- ---------- ---------- - ----------                                   
+    138969 Shane                          Fox                                   
+        70        170         13 D      57984                                   
+                                                                                
+    138966 Ryan                           Carr                                  
+        74        190         23 D      57984                                   
+                                                                                
+    139026 Andy                           Zubak                                 
+        71        174         28 D      57984                                   
+                                                                                
+
+  PLAYERID FNAME                          LNAME                                 
+---------- ------------------------------ ------------------------------        
+    HEIGHT     WEIGHT        NUM P        TID                                   
+---------- ---------- ---------- - ----------                                   
+    139009 Adam                           Goggio                                
+        76        175         37 G      57984                                   
+                                                                                
+    139715 Luc                            Corso                                 
+        70        175         11 F      57950                                   
+                                                                                
+    140701 Matthew                        O~Shaughnessy                         
+        69        160         91 F      57950                                   
+                                                                                
+
+  PLAYERID FNAME                          LNAME                                 
+---------- ------------------------------ ------------------------------        
+    HEIGHT     WEIGHT        NUM P        TID                                   
+---------- ---------- ---------- - ----------                                   
+    139458 Rhys                           Marcel                                
+        71        180          2 F      57966                                   
+                                                                                
+    139315 Justin                         O~Connell                             
+        74        185         12 D      57966                                   
+                                                                                
+    139633 Will                           Lalor                                 
+        70        175         47 F      57958                                   
+                                                                                
+
+  PLAYERID FNAME                          LNAME                                 
+---------- ------------------------------ ------------------------------        
+    HEIGHT     WEIGHT        NUM P        TID                                   
+---------- ---------- ---------- - ----------                                   
+    139602 Ryan                           O~Regan                               
+        69        150          5 F      57958                                   
+                                                                                
+
+16 rows selected.
+
+SQL> SELECT * FROM game;
+
+    GAMEID GDATE         HSCORE     ASCORE       HTID       ATID                
+---------- --------- ---------- ---------- ---------- ----------                
+       511 22-NOV-16          3          0      57984      57966                
+       512 28-NOV-16          2          3      57958      57984                
+       513 30-NOV-16          5          1      57984      57958                
+
+3 rows selected.
+
+SQL> SELECT * FROM team_stats;
+
+      YEAR       TMID       WINS     LOSSES     POINTS                          
+---------- ---------- ---------- ---------- ----------                          
+      2017      57984         16          2         32                          
+      2017      57950         15          3         30                          
+      2017      57966         13          5         26                          
+      2017      57958         11          6         23                          
+      2017      57959          4         13          9                          
+
+5 rows selected.
+
+SQL> SELECT * FROM locations;
+
+UNINAME                                                                         
+--------------------------------------------------                              
+LOCATION                                                                        
+------------------------------                                                  
+Farmingdale State College                                                       
+Farmingdale, NY                                                                 
+                                                                                
+Neumann University                                                              
+Aston, PA                                                                       
+                                                                                
+Robert Morris University                                                        
+Moon, PA                                                                        
+                                                                                
+
+UNINAME                                                                         
+--------------------------------------------------                              
+LOCATION                                                                        
+------------------------------                                                  
+University of Massachusetts                                                     
+Amherst, MA                                                                     
+                                                                                
+University of Massachusetts                                                     
+Boston, MA                                                                      
+                                                                                
+University of Massachusetts                                                     
+North Dartmouth, MA                                                             
+                                                                                
+
+UNINAME                                                                         
+--------------------------------------------------                              
+LOCATION                                                                        
+------------------------------                                                  
+University of Rhode Island                                                      
+Kingston, RI                                                                    
+                                                                                
+University of Rhode Island                                                      
+Narragansett, RI                                                                
+                                                                                
+University of Rhode Island                                                      
+Providence, RI                                                                  
+                                                                                
+
+9 rows selected.
+
+SQL> SELECT * FROM games_played;
+
+       PID        GID GOALSSCORED                                               
+---------- ---------- -----------                                               
+    138969        511           3                                               
+    138966        511           0                                               
+    138970        511           0                                               
+    138942        511           0                                               
+    138962        511           0                                               
+    138969        512           1                                               
+    138970        512           0                                               
+    138942        512           0                                               
+    138962        512           2                                               
+    139026        512           0                                               
+    138969        513           2                                               
+
+       PID        GID GOALSSCORED                                               
+---------- ---------- -----------                                               
+    138966        513           0                                               
+    139009        513           0                                               
+    138965        513           3                                               
+    139026        513           0                                               
+
+15 rows selected.
+
+SQL> --------------------------------------------------------------------------------
+SQL> /*
+SQL>   Database Queries
+SQL> */
+SQL> /*
+SQL>  Q1 - Join Involving Four Relations
+SQL> For all the players who weigh more than 180lbs, whose team is top 2 in the
+SQL> league and a university population of less than 10,000, find the last name,
+SQL> university name, total points, university name, and university size, order
+SQL> by the last name.
+SQL> */
+SQL> 
+SQL> SELECT P.lname, U.uName, S.points, U.usize
+  2  FROM player P, team T, team_stats S, university U
+  3  WHERE P.tID = T.teamID AND T.teamID = S.tmID AND T.univName = U.uName
+  4  	   AND S.points >= 30 AND U.Usize < 5000 AND P.weight > 180
+  5  ORDER BY P.lname;
+
+LNAME                                                                           
+------------------------------                                                  
+UNAME                                                  POINTS      USIZE        
+-------------------------------------------------- ---------- ----------        
+Carr                                                                            
+Neumann University                                         32       3000        
+                                                                                
+Kraft                                                                           
+Neumann University                                         32       3000        
+                                                                                
+Phelan                                                                          
+Neumann University                                         32       3000        
+                                                                                
+
+LNAME                                                                           
+------------------------------                                                  
+UNAME                                                  POINTS      USIZE        
+-------------------------------------------------- ---------- ----------        
+Strofe                                                                          
+Neumann University                                         32       3000        
+                                                                                
+
+4 rows selected.
+
+SQL> 
+SQL> /*
+SQL> Q2 - A Self-Join
+SQL> For all pairs of players on Neumann that weigh more than 200
+SQL> pounds, and the first player is taller and weighes more than the second player,
+SQL> find the last name and weights of each pair.
+SQL> Output should be Strofe/Desalvo && Strofe/Saklad
+SQL> */
+SQL> SELECT p1.lname, p1.weight, p1.height, p2.lname, p2.weight, p2.height
+  2  FROM player p1, player p2
+  3  WHERE p1.weight > 200 AND p1.weight > p2.weight AND
+  4  	   p1.height > p2.height AND p1.tID = 57984 AND
+  5  	   p1.tID = p2.tID;
+
+LNAME                              WEIGHT     HEIGHT                            
+------------------------------ ---------- ----------                            
+LNAME                              WEIGHT     HEIGHT                            
+------------------------------ ---------- ----------                            
+Strofe                                225         70                            
+DeSalvo                               145         66                            
+                                                                                
+Strofe                                225         70                            
+Saklad                                160         67                            
+                                                                                
+
+2 rows selected.
+
+SQL> 
+SQL> /*
+SQL>  Q3 - MIN
+SQL> Find the minimum player weight in the league.
+SQL> Output should be 125
+SQL> */
+SQL> SELECT MIN(p.weight)
+  2  FROM player p;
+
+MIN(P.WEIGHT)                                                                   
+-------------                                                                   
+          145                                                                   
+
+1 row selected.
+
+SQL> 
+SQL> /*
+SQL> Q4 - AVG, INTERSECT
+SQL> For all forwards whose teams are at the top and weight below the league average,
+SQL> find the first name, last name, university name.
+SQL> Output should be Schultz, Saklad, & DeSalvo
+SQL> */
+SQL> SELECT p.fname, p.lname, t.univName
+  2  FROM player p, team t
+  3  WHERE t.teamID = p.tID AND p.position = 'F' AND p.weight < ALL
+  4  					  (SELECT AVG(p2.weight)
+  5  					   FROM player p2)
+  6  INTERSECT
+  7  SELECT P.fname, P.lname, T.univName
+  8  FROM player P, team_stats S, team T
+  9  WHERE T.teamID = P.tID AND S.points > 30 AND T.teamID = S.tmID;
+
+FNAME                          LNAME                                            
+------------------------------ ------------------------------                   
+UNIVNAME                                                                        
+--------------------------------------------------                              
+Derek                          Schultz                                          
+Neumann University                                                              
+                                                                                
+Gregory                        Saklad                                           
+Neumann University                                                              
+                                                                                
+Nicholas                       DeSalvo                                          
+Neumann University                                                              
+                                                                                
+
+3 rows selected.
+
+SQL> 
+SQL> /*
+SQL> Q5 LIKE
+SQL> For all players whose names contain ~O and belong to teams with more than
+SQL> 25 points, find the names, university name, and points, order by total the points.
+SQL> Output should be O~Shaughnessy and O~Connell
+SQL> */
+SQL> SELECT P.fname, P.lname, T.univName, S.points
+  2  FROM player P, team T, team_stats S
+  3  WHERE P.tId = T.teamId AND T.teamID = S.tmID AND P.lname LIKE '%O~%'
+  4  			    AND S.points > 25
+  5  ORDER BY S.points;
+
+FNAME                          LNAME                                            
+------------------------------ ------------------------------                   
+UNIVNAME                                               POINTS                   
+-------------------------------------------------- ----------                   
+Justin                         O~Connell                                        
+University of Massachusetts                                26                   
+                                                                                
+Matthew                        O~Shaughnessy                                    
+Farmingdale State College                                  30                   
+                                                                                
+
+2 rows selected.
+
+SQL> 
+SQL> /*
+SQL> Q6 - Correlated subquery
+SQL> For every player who scored at least 2 goals in Neumann's games, find the
+SQL> playerID, last name, height and position.
+SQL> Output should be DeSalvo and Fox
+SQL> */
+SQL> SELECT DISTINCT p.playerID, p.lname, p.height, p.position
+  2  FROM player p
+  3  WHERE EXISTS (SELECT gp.goalsScored
+  4  				   FROM games_played gp
+  5  				   WHERE gp.pID = p.playerID AND gp.goalsScored >= 2)
+  6  ORDER BY p.lname;
+
+  PLAYERID LNAME                              HEIGHT P                          
+---------- ------------------------------ ---------- -                          
+    138962 DeSalvo                                66 F                          
+    138969 Fox                                    70 D                          
+    138965 Strofe                                 70 F                          
+
+3 rows selected.
+
+SQL> 
+SQL> /*
+SQL> Q7 - Non-Correlated Qubquery
+SQL> For all universities not among the universities founded before the average
+SQL> finding year and a student population is less than 6000, find the name,
+SQL> size, and yearfound, order by year founded
+SQL> Output should be Robert Morris University / Neumann University
+SQL> */
+SQL> SELECT U.uName, U.uSize, U.yearFounded
+  2  FROM university U
+  3  WHERE U.uSize < 6000 AND
+  4  	   U.yearFounded NOT IN ( SELECT AVG(Utwo.yearFounded)
+  5  				  FROM university Utwo
+  6  				 )
+  7  ORDER BY U.yearFounded;
+
+UNAME                                                   USIZE YEARFOUNDED       
+-------------------------------------------------- ---------- -----------       
+Robert Morris University                                 5000        1921       
+Neumann University                                       3000        1965       
+
+2 rows selected.
+
+SQL> 
+SQL> /*
+SQL> Q8 - Division Query
+SQL> For all players that played in every Neumann University game, find the first
+SQL> name, last name, playerID.
+SQL> Output should be Fox Shane
+SQL> */
+SQL> SELECT P.fname, P.lname, P.playerID
+  2  FROM player P
+  3  WHERE NOT EXISTS((SELECT G.gameID
+  4  		      FROM game G
+  5  		      WHERE G.hTID = 57984 OR G.aTID = 57984)
+  6  		      MINUS
+  7  		      (SELECT GP.gID
+  8  		       FROM games_played GP
+  9  		       WHERE GP.pID = P.playerID AND P.tID = 57984));
+
+FNAME                          LNAME                            PLAYERID        
+------------------------------ ------------------------------ ----------        
+Shane                          Fox                                138969        
+
+1 row selected.
+
+SQL> 
+SQL> /*
+SQL> Q9 - OUTER JOIN, GROUP BY, HAVING, and ORDER BY
+SQL> For all universities with more than two locations, find the name, size and
+SQL> number of campuses, order by university name
+SQL> Output should be University of Rhode Island & UniMass
+SQL> */
+SQL> SELECT U.uName, U.usize, COUNT(*) AS campuses
+  2  FROM university U LEFT OUTER JOIN locations L ON U.uName = L.uniName
+  3  GROUP BY U.uName, U.usize
+  4  HAVING count(*) > 2
+  5  ORDER BY U.uName;
+
+UNAME                                                   USIZE   CAMPUSES        
+-------------------------------------------------- ---------- ----------        
+University of Massachusetts                             79000          3        
+University of Rhode Island                              16000          3        
+
+2 rows selected.
+
+SQL> 
+SQL> 
+SQL> /*
+SQL> Q10 - Rank query
+SQL> Find the rank of '15' in the win category
+SQL> Output should be 2
+SQL> */
+SQL> SELECT RANK (15) WITHIN GROUP (ORDER BY wins DESC) "rank15"
+  2  FROM team_stats t;
+
+    rank15                                                                      
+----------                                                                      
+         2                                                                      
+
+1 row selected.
+
+SQL> 
+SQL> /*
+SQL> Q11 - Top N query
+SQL> For the top 2 teams in the points category, Find the name, jerseyColor and mascot.
+SQL> Output should be Neumann, Farmingdale
+SQL> */
+SQL> SELECT DISTINCT T.univName, T.jerseyColor, T.mascot
+  2  FROM team T
+  3  WHERE T.teamID IN (SELECT TS.tmID
+  4  			FROM (SELECT tmID FROM team_stats ORDER BY  points DESC) TS
+  5  			WHERE ROWNUM < 3) ;
+
+UNIVNAME                                           JERSEYCOLOR                  
+-------------------------------------------------- --------------------         
+MASCOT                                                                          
+------------------------------                                                  
+Farmingdale State College                          Green                        
+Rams                                                                            
+                                                                                
+Neumann University                                 Navy                         
+Knights                                                                         
+                                                                                
+
+2 rows selected.
+
+SQL> -------------------------------------------------------------------------------
+SQL> 
+SQL> /*
+SQL> Testing: < ICJERSEYNUMBERGOALIE >
+SQL> */
+SQL> insert into player values (     139613, 'Evan', 'Hosney',	     70,     160,    1,      'G',    57958   );
+insert into player values (	139613,	'Evan',	'Hosney',	70,	160,	1,	'G',	57958	)
+*
+ERROR at line 1:
+ORA-02290: check constraint (RUBAMBIG.ICJERSEYNUMBERGOALIE) violated 
+
+
+SQL> 
+SQL> /*
+SQL> Testing: < ICJERSEYNUMBER >
+SQL> */
+SQL> insert into player values (     123456, 'Gloire',	     'Rubambiza',    71,     140,    100,    'G',    57958   );
+insert into player values (	123456,	'Gloire',	'Rubambiza',	71,	140,	100,	'G',	57958	)
+*
+ERROR at line 1:
+ORA-02290: check constraint (RUBAMBIG.ICJERSEYNUMBER) violated 
+
+
+SQL> 
+SQL> /*
+SQL> Testing: < ICUNIVNAMENODOTS >
+SQL> */
+SQL> insert into university values ('G.V.S.U', 25000, 1960);
+insert into university values ('G.V.S.U', 25000, 1960)
+*
+ERROR at line 1:
+ORA-02290: check constraint (RUBAMBIG.ICUNIVNAMENODOTS) violated 
+
+
+SQL> 
+SQL> /*
+SQL> Testing: < ICUNIVNAMEFOREIGNKEY >
+SQL> */
+SQL> insert into team values(51984, 'Red', 'I Love China', 'Trump University');
+insert into team values(51984, 'Red', 'I Love China', 'Trump University')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (RUBAMBIG.ICUNIVNAMEFOREIGNKEY) violated - 
+parent key not found 
+
+
+SQL> 
+SQL> /*
+SQL> Testing: < ICUNIVNAMEFOREIGNKEY >
+SQL> */
+SQL> insert into game values(514, '30-Nov-2016', 5, 1, 57922, 57946);
+insert into game values(514, '30-Nov-2016', 5, 1, 57922, 57946)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (RUBAMBIG.ICATIDFOREIGNKEY) violated - parent 
+key not found 
+
+
+SQL> 
+SQL> /*
+SQL> Testing: < ICPIDFOREIGNKEY >
+SQL> */
+SQL> insert into games_played values(139011, 513, 0);
+insert into games_played values(139011, 513, 0)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (RUBAMBIG.ICPIDFOREIGNKEY) violated - parent 
+key not found 
+
+
+SQL> 
+SQL> /*
+SQL> Testing: < ICUNINAMEFOREIGNKEY >
+SQL> */
+SQL> insert into locations values('Grand Valley State University', 'Grand Rapids, MI');
+insert into locations values('Grand Valley State University', 'Grand Rapids, MI')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (RUBAMBIG.ICUNINAMEFOREIGNKEY) violated - 
+parent key not found 
+
+
+SQL> 
+SQL> /*
+SQL> Testing: < ICTMIDFOREIGNKEY >
+SQL> */
+SQL> insert into team_stats values(2017, 57901, 3, 14, 7 );
+insert into team_stats values(2017, 57901, 3, 14, 7 )
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (RUBAMBIG.ICTMIDFOREIGNKEY) violated - parent 
+key not found 
+
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> --------------------------------------------------------------------------------
+SQL> SPOOL OFF

@@ -1,47 +1,37 @@
 -- Join involving four relations
--- Find all the players whose team is top 2 in the league with a size < 10,000
+-- Find all the players who weigh more than 180lbs, whose team is top 2 in the
+-- league and a university population of less than 10,000
 -- Order by the last name
--- Output should be all Neumann University players
+-- Output should be all Car, Kraft, Phelan, and Strofe
 SELECT P.lname, U.uName, S.points, U.usize
 FROM player P, team T, team_stats S, university U
-WHERE P.tID = T.teamID AND T.teamID = S.tmID and T.univName = U.uName
-      AND S.points >= 30 AND U.Usize < 5000
+WHERE P.tID = T.teamID AND T.teamID = S.tmID AND T.univName = U.uName
+      AND S.points >= 30 AND U.Usize < 5000 AND P.weight > 180
 ORDER BY P.lname;
 
 
 -- A self join
--- Find all of the pairs of players on Neumann that weigh more than 200 
--- pounds, where the first player taller and weighes more than the second player
--- Output should be
+-- Find all of the pairs of players on Neumann that weigh more than 200
+-- pounds, where the first player is taller and weighes more than the second player
+-- Output should be Strofe/Desalvo && Strofe/Saklad
 SELECT p1.lname, p1.weight, p1.height, p2.lname, p2.weight, p2.height
 FROM player p1, player p2
 WHERE p1.weight > 200
 AND p1.weight > p2.weight
 AND p1.height > p2.height
-AND p1.tID = 57984 
+AND p1.tID = 57984
 AND p1.tID = p2.tID;
 
 
-
--- UNION, INTERSECT, and/or MINUS
---
--- Output should be
--- SUM
--- Find the total number of games played in the season
--- Output should be
-SELECT SUM(s.wins)
-FROM team_stats s, team t
-WHERE t.teamID = s.tmID;
-
 -- MIN
--- Find the minimum
--- Output should be
+-- Find the minimum player weight in the league
+-- Output should be 125
 SELECT MIN(p.weight)
 FROM player p;
 
 
 -- AVG, INTERSECT
--- Find the name, and university of all forwards who teams are at the top
+-- Find the name, and university of all forwards whose teams are at the top
 -- and whose weights are below the league average
 -- Output should be Schultz, Saklad, & DeSalvo
 SELECT p.fname, p.lname, t.univName
@@ -76,7 +66,7 @@ ORDER BY p.lname;
 --
 
 -- Non-Correlated subquery
--- Find a university that was is not among the universities founded before the average
+-- Find a university that is not among the universities founded before the average
 -- finding year and the population is < 6000, order by year founded
 -- Output should be Robert Morris University / Neumann University
 SELECT U.uName, U.uSize, U.yearFounded
@@ -90,7 +80,7 @@ ORDER BY U.yearFounded;
 
 
 -- Division query
--- Find which player(s) from the Neumann University played in all games 57984
+-- Find which player(s) from Neumann University played in all its games
 -- Output should be Fox Shane
 SELECT P.fname, P.lname, P.playerID
 FROM player P
@@ -104,12 +94,12 @@ WHERE NOT EXISTS((SELECT G.gameID
 
 
 -- Outer join query && GROUP BY, HAVING, and ORDER BY
--- Find the name and size for all universities with more than three locations
+-- Find the name and size for all universities with more than two locations
 -- Output should be University of Rhode Island & UniMass
 SELECT U.uName, U.usize, COUNT(*) AS campuses
 FROM university U LEFT OUTER JOIN locations L ON U.uName = L.uniName
 GROUP BY U.uName, U.usize
-HAVING count(*) > 3
+HAVING count(*) > 2
 ORDER BY U.uName;
 
 
@@ -122,8 +112,8 @@ FROM team_stats t;
 --
 
 -- Top N query
--- Find the name, jerseyColor and mascot of the top 3 in the points category
--- Output should be Neumann, Farmingdale, and West Chester
+-- Find the name, jerseyColor and mascot of the top 2 in the points category
+-- Output should be Neumann, Farmingdale
 SELECT DISTINCT T.univName, T.jerseyColor, T.mascot
 FROM team T
 WHERE T.teamID IN (SELECT TS.tmID
